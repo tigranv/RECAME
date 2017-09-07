@@ -4,16 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>Recam.DB</Name>
+    <Name>Recame.DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{408b5107-33f6-4fd8-a08f-eaba812840a3}</ProjectGuid>
+    <ProjectGuid>{f360aa42-e279-4c1a-ab7f-a4e05a6cfde2}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>Recam.DB</RootNamespace>
-    <AssemblyName>Recam.DB</AssemblyName>
+    <RootNamespace>Recame.DB</RootNamespace>
+    <AssemblyName>Recame.DB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -60,8 +60,8 @@
     <Folder Include="dbo" />
     <Folder Include="Scripts" />
     <Folder Include="dbo\Functions" />
-    <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Tables" />
+    <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Views" />
   </ItemGroup>
 </Project>
