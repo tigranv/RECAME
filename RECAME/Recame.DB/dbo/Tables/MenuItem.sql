@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[MenuItem]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)

@@ -64,4 +64,11 @@
     <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Views" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\FoodShop.sql" />
+    <Build Include="dbo\Tables\Menu.sql" />
+    <Build Include="dbo\Tables\Ingredient.sql" />
+    <Build Include="dbo\Tables\MenuItem.sql" />
+    <Build Include="dbo\Tables\MenuItemIngredient.sql" />
+  </ItemGroup>
 </Project>
