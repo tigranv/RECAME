@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Recame.DAL
+namespace Recame.DAL.Interfaces
 {
-    public class Class1
+    public interface IObjectVersion
     {
+        byte[] UpdateVersion { get; set; }
     }
 }
