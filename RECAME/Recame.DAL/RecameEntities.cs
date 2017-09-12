@@ -1,4 +1,5 @@
-﻿using Recame.DAL.Interfaces;
+﻿using Recame.Common.Helpers;
+using Recame.DAL.Interfaces;
 using Recame.DAL.Repository.Core;
 using System;
 using System.Collections.Generic;

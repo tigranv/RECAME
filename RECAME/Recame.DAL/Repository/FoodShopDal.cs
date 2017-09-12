@@ -1,4 +1,5 @@
-﻿using Recame.DAL.Interfaces.Repository;
+﻿using Recame.DAL.DataContracts.Filters;
+using Recame.DAL.Interfaces.Repository;
 using Recame.DAL.Repository.Core;
 using System;
 using System.Collections.Generic;

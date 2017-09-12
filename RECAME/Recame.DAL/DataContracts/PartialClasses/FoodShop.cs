@@ -20,7 +20,7 @@ namespace Recame.DAL
 
         public ObjectTypeEnum SelfType
         {
-            get { return ObjectTypeEnum.Bonus; }
+            get { return ObjectTypeEnum.FoodShop; }
         }
 
         public override bool IsLoggingChanges

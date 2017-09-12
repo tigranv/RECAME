@@ -3,6 +3,6 @@ RETURNS TABLE
 AS
 RETURN
     ( SELECT    mi.* 
-      FROM      menuItem mi
+      FROM      MenuItem mi
 
     )
