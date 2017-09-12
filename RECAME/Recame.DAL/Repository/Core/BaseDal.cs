@@ -164,7 +164,6 @@ namespace Recame.DAL.Repository.Core
             return db.HasChanges();
         }
 
-
         public int SaveChanges()
         {
             return db.SaveChanges();
@@ -252,7 +251,6 @@ namespace Recame.DAL.Repository.Core
             return query;
 
         }
-
 
         private string GetTableName<TEntity>() where TEntity : ModelBase
         {
