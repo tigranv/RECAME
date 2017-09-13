@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Recame.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Recame.DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -17,7 +17,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Ingredient">
           <Key>
@@ -189,8 +189,7 @@
             <End Role="MenuItemIngredient" EntitySet="MenuItemIngredient" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Recame.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -199,18 +198,18 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </ComplexType>
-        <ComplexType Name="fn_Menu_Result">
+        <ComplexType Name="fnMenu">
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="FoodShopId" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </ComplexType>
-        <ComplexType Name="fn_MenuItem_Result">
+        <ComplexType Name="fnMenuItem">
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MenuId" Type="Int32" />
         </ComplexType>
-        <ComplexType Name="fn_MenuItemIngredient_Result">
+        <ComplexType Name="fnMenuItemIngredient">
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="MenuItemId" Type="Int32" Nullable="false" />
           <Property Name="IngredientId" Type="Int32" Nullable="false" />
@@ -227,7 +226,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Menus" Relationship="Self.FK_Menu_FoodShop" FromRole="FoodShop" ToRole="Menu" />
         </EntityType>
         <EntityType Name="Ingredient">
@@ -350,12 +349,12 @@
             <End Role="MenuItemIngredient" EntitySet="MenuItemIngredients" />
           </AssociationSet>
           <FunctionImport Name="fn_FoodShop" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnFoodShop)">
-            <Parameter Name="Language" Mode="In" Type="String" />
+          <Parameter Name="Language" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="fn_Ingredient" IsComposable="true" ReturnType="Collection(Recame.DBModel.fn_Ingredient_Result)" />
-          <FunctionImport Name="fn_Menu" IsComposable="true" ReturnType="Collection(Recame.DBModel.fn_Menu_Result)" />
-          <FunctionImport Name="fn_MenuItem" IsComposable="true" ReturnType="Collection(Recame.DBModel.fn_MenuItem_Result)" />
-          <FunctionImport Name="fn_MenuItemIngredient" IsComposable="true" ReturnType="Collection(Recame.DBModel.fn_MenuItemIngredient_Result)" />
+          <FunctionImport Name="fn_Menu" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnMenu)" />
+          <FunctionImport Name="fn_MenuItem" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnMenuItem)" />
+          <FunctionImport Name="fn_MenuItemIngredient" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnMenuItemIngredient)" />
         </EntityContainer>
         <ComplexType Name="fnFoodShop">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -441,7 +440,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionName="Recame.DBModel.Store.fn_Menu" FunctionImportName="fn_Menu">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Recame.DBModel.fn_Menu_Result">
+              <ComplexTypeMapping TypeName="Recame.DBModel.fnMenu">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FoodShopId" ColumnName="FoodShopId" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -450,7 +449,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionName="Recame.DBModel.Store.fn_MenuItem" FunctionImportName="fn_MenuItem">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Recame.DBModel.fn_MenuItem_Result">
+              <ComplexTypeMapping TypeName="Recame.DBModel.fnMenuItem">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -460,7 +459,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionName="Recame.DBModel.Store.fn_MenuItemIngredient" FunctionImportName="fn_MenuItemIngredient">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Recame.DBModel.fn_MenuItemIngredient_Result">
+              <ComplexTypeMapping TypeName="Recame.DBModel.fnMenuItemIngredient">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
                 <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />

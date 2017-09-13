@@ -51,21 +51,21 @@ namespace Recame.DAL
         }
     
         [DbFunction("RecameEntities", "fn_Menu")]
-        public virtual IQueryable<fn_Menu_Result> fn_Menu()
+        public virtual IQueryable<fnMenu> fn_Menu()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_Menu_Result>("[RecameEntities].[fn_Menu]()");
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fnMenu>("[RecameEntities].[fn_Menu]()");
         }
     
         [DbFunction("RecameEntities", "fn_MenuItem")]
-        public virtual IQueryable<fn_MenuItem_Result> fn_MenuItem()
+        public virtual IQueryable<fnMenuItem> fn_MenuItem()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_MenuItem_Result>("[RecameEntities].[fn_MenuItem]()");
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fnMenuItem>("[RecameEntities].[fn_MenuItem]()");
         }
     
         [DbFunction("RecameEntities", "fn_MenuItemIngredient")]
-        public virtual IQueryable<fn_MenuItemIngredient_Result> fn_MenuItemIngredient()
+        public virtual IQueryable<fnMenuItemIngredient> fn_MenuItemIngredient()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_MenuItemIngredient_Result>("[RecameEntities].[fn_MenuItemIngredient]()");
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fnMenuItemIngredient>("[RecameEntities].[fn_MenuItemIngredient]()");
         }
     }
 }

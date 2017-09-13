@@ -62,13 +62,13 @@
     <Compile Include="fnFoodShop.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="fnMenuItem.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fnMenuItemIngredient.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="fn_Ingredient_Result.cs">
-      <DependentUpon>RecameEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="fn_MenuItemIngredient_Result.cs">
-      <DependentUpon>RecameEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="fn_MenuItem_Result.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="fn_Menu_Result.cs">

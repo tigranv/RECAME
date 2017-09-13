@@ -11,11 +11,10 @@ namespace Recame.DAL
 {
     using System;
     
-    public partial class fn_MenuItem_Result
+    public partial class fnMenuItemIngredient
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Nullable<int> MenuId { get; set; }
+        public int MenuItemId { get; set; }
+        public int IngredientId { get; set; }
     }
 }
