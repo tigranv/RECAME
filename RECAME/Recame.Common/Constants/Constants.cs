@@ -11,9 +11,7 @@ namespace Recame.Common.Constants
         public static class Errors
         {
            
-           
-            public const string EmptyTranslation = "EmptyTranslation";
-            public const string WrongHash = "WrongHash";
+           public const string WrongHash = "WrongFood";
             
         }
 

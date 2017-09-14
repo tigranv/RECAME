@@ -11,7 +11,7 @@ namespace Recame.DAL
 {
     using System;
     
-    public partial class fn_Menu_Result
+    public partial class fnMenu
     {
         public int Id { get; set; }
         public int FoodShopId { get; set; }

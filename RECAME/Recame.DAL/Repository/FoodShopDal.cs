@@ -18,12 +18,13 @@ namespace Recame.DAL.Repository
 
         public FoodShop GetFoodShopById(int id)
         {
-            throw new NotImplementedException();
+            return db.FoodShops.FirstOrDefault(x => x.Id == id);
         }
 
         public List<fnFoodShop> GetFoodShops(FilterFoodShop filter)
         {
-            throw new NotImplementedException();
+            var query = db.fn_FoodShop(filter.LangId).AsQueryable();
+            return filter.FilterObjects(query).ToList();
         }
     }
 }

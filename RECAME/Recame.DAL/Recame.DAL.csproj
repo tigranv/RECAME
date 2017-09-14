@@ -59,7 +59,11 @@
     <Compile Include="DataContracts\Filters\FilterFoodShop.cs" />
     <Compile Include="DataContracts\ModelBase.cs" />
     <Compile Include="DataContracts\PartialClasses\FoodShop.cs" />
+    <Compile Include="DataContracts\SessionInfo.cs" />
     <Compile Include="fnFoodShop.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fnMenu.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="fnMenuItem.cs">
@@ -71,15 +75,13 @@
     <Compile Include="fn_Ingredient_Result.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="fn_Menu_Result.cs">
-      <DependentUpon>RecameEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="FoodShop.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Ingredient.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IDALFactory.cs" />
     <Compile Include="Interfaces\IFilter.cs" />
     <Compile Include="Interfaces\IObjectInfo.cs" />
     <Compile Include="Interfaces\IObjectVersion.cs" />
