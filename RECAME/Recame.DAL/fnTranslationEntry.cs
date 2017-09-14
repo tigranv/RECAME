@@ -11,10 +11,12 @@ namespace Recame.DAL
 {
     using System;
     
-    public partial class fn_Ingredient_Result
+    public partial class fnTranslationEntry
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
+        public string LanguageId { get; set; }
+        public Nullable<System.DateTimeOffset> Modified { get; set; }
+        public Nullable<int> SessionId { get; set; }
+        public string Text { get; set; }
+        public Nullable<int> TranslationId { get; set; }
     }
 }

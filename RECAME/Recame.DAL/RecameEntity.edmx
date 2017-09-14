@@ -16,8 +16,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameId" Type="int" Nullable="false" />
           <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="DescriptionId" Type="int" />
         </EntityType>
         <EntityType Name="Ingredient">
           <Key>
@@ -26,6 +27,16 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Type" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="NumId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EnName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ISOCode" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -52,6 +63,55 @@
           <Property Name="MenuItemId" Type="int" Nullable="false" />
           <Property Name="IngredientId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ObjectType" Type="int" Nullable="false" />
+          <Property Name="Modified" Type="datetimeoffset" Precision="3" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="255" />
+          <Property Name="UpdateVersion" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="ObjectId" Type="bigint" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ExternalId" Type="int" />
+        </EntityType>
+        <EntityType Name="TranslationEntry">
+          <Key>
+            <PropertyRef Name="TranslationId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="TranslationId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Modified" Type="datetimeoffset" Precision="3" Nullable="false" />
+          <Property Name="SessionId" Type="int" Nullable="false" />
+          <Property Name="UpdateVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FoodShop_Desription">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="FoodShop" Type="Self.FoodShop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodShop">
+              <PropertyRef Name="DescriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FoodShop_Name">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="1" />
+          <End Role="FoodShop" Type="Self.FoodShop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodShop">
+              <PropertyRef Name="NameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Menu_FoodShop">
           <End Role="FoodShop" Type="Self.FoodShop" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -108,14 +168,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TranslationEntry_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="TranslationEntry" Type="Self.TranslationEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationEntry">
+              <PropertyRef Name="LanguageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TranslationEntry_Translation">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TranslationEntry" Type="Self.TranslationEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationEntry">
+              <PropertyRef Name="TranslationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_FoodShop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Language" Type="char" Mode="In" />
+          <Parameter Name="lang" Type="char" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
                 <Property Name="Id" Type="int" Nullable="false" />
-                <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
-                <Property Name="Type" Type="varchar" MaxLength="50" />
+                <Property Name="Type" Type="int" Nullable="false" />
+                <Property Name="NameId" Type="int" Nullable="false" />
+                <Property Name="DescriptionId" Type="int" />
+                <Property Name="Name" Type="nvarchar" MaxLength="400" Nullable="false" />
+                <Property Name="Description" Type="nvarchar" MaxLength="400" Nullable="false" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -165,13 +254,64 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="fn_Translation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Language" Type="char" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="Language" Type="char" MaxLength="2" />
+                <Property Name="Id" Type="int" Nullable="false" />
+                <Property Name="ObjectType" Type="int" Nullable="false" />
+                <Property Name="Key" Type="varchar" MaxLength="255" />
+                <Property Name="Modified" Type="datetimeoffset" Precision="3" Nullable="false" />
+                <Property Name="Text" Type="nvarchar" MaxLength="400" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_TranslationEntry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TranslationId" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="LanguageId" Type="char" MaxLength="2" Nullable="false" />
+                <Property Name="Modified" Type="datetimeoffset" Precision="3" />
+                <Property Name="SessionId" Type="int" />
+                <Property Name="Text" Type="nvarchar" MaxLength="400" />
+                <Property Name="TranslationId" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_TranslationEntryDef" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Language" Type="char" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="TranslationId" Type="int" Nullable="false" />
+                <Property Name="Text" Type="nvarchar" MaxLength="400" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="RecameDBModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FoodShop" EntityType="Self.FoodShop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuItem" EntityType="Self.MenuItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuItemIngredient" EntityType="Self.MenuItemIngredient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TranslationEntry" EntityType="Self.TranslationEntry" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FoodShop_Desription" Association="Self.FK_FoodShop_Desription">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="FoodShop" EntitySet="FoodShop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FoodShop_Name" Association="Self.FK_FoodShop_Name">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="FoodShop" EntitySet="FoodShop" />
+          </AssociationSet>
           <AssociationSet Name="FK_Menu_FoodShop" Association="Self.FK_Menu_FoodShop">
             <End Role="FoodShop" EntitySet="FoodShop" />
             <End Role="Menu" EntitySet="Menu" />
@@ -188,12 +328,28 @@
             <End Role="MenuItem" EntitySet="MenuItem" />
             <End Role="MenuItemIngredient" EntitySet="MenuItemIngredient" />
           </AssociationSet>
+          <AssociationSet Name="FK_TranslationEntry_Language" Association="Self.FK_TranslationEntry_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="TranslationEntry" EntitySet="TranslationEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TranslationEntry_Translation" Association="Self.FK_TranslationEntry_Translation">
+            <End Role="Translation" EntitySet="Translation" />
+            <End Role="TranslationEntry" EntitySet="TranslationEntry" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Recame.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <ComplexType Name="fn_Ingredient_Result">
+        <ComplexType Name="fnFoodShop">
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="NameId" Type="Int32" Nullable="false" />
+          <Property Name="DescriptionId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fnIngredient">
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -214,6 +370,25 @@
           <Property Name="MenuItemId" Type="Int32" Nullable="false" />
           <Property Name="IngredientId" Type="Int32" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="fnTranslation">
+          <Property Name="Language" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ObjectType" Type="Int32" Nullable="false" />
+          <Property Name="Key" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Modified" Type="DateTimeOffset" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fnTranslationEntry">
+          <Property Name="LanguageId" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Modified" Type="DateTimeOffset" />
+          <Property Name="SessionId" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="TranslationId" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="fnTranslationEntryDef">
+          <Property Name="TranslationId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
         <EntityType Name="C__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -225,8 +400,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NameId" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="DescriptionId" Type="Int32" />
+          <NavigationProperty Name="Translation" Relationship="Self.FK_FoodShop_Desription" FromRole="FoodShop" ToRole="Translation" />
+          <NavigationProperty Name="Translation1" Relationship="Self.FK_FoodShop_Name" FromRole="FoodShop" ToRole="Translation" />
           <NavigationProperty Name="Menus" Relationship="Self.FK_Menu_FoodShop" FromRole="FoodShop" ToRole="Menu" />
         </EntityType>
         <EntityType Name="Ingredient">
@@ -237,6 +415,17 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="MenuItemIngredients" Relationship="Self.FK_MenuItemIngredient_IngredientId" FromRole="Ingredient" ToRole="MenuItemIngredient" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NumId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EnName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ISOCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TranslationEntries" Relationship="Self.FK_TranslationEntry_Language" FromRole="Language" ToRole="TranslationEntry" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -269,6 +458,60 @@
           <NavigationProperty Name="Ingredient" Relationship="Self.FK_MenuItemIngredient_IngredientId" FromRole="MenuItemIngredient" ToRole="Ingredient" />
           <NavigationProperty Name="MenuItem" Relationship="Self.FK_MenuItemIngredient_MenuItemId" FromRole="MenuItemIngredient" ToRole="MenuItem" />
         </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ObjectType" Type="Int32" Nullable="false" />
+          <Property Name="Modified" Type="DateTimeOffset" Nullable="false" Precision="3" />
+          <Property Name="Key" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateVersion" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ObjectId" Type="Int64" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="ExternalId" Type="Int32" />
+          <NavigationProperty Name="FoodShops" Relationship="Self.FK_FoodShop_Desription" FromRole="Translation" ToRole="FoodShop" />
+          <NavigationProperty Name="FoodShops1" Relationship="Self.FK_FoodShop_Name" FromRole="Translation" ToRole="FoodShop" />
+          <NavigationProperty Name="TranslationEntries" Relationship="Self.FK_TranslationEntry_Translation" FromRole="Translation" ToRole="TranslationEntry" />
+        </EntityType>
+        <EntityType Name="TranslationEntry">
+          <Key>
+            <PropertyRef Name="TranslationId" />
+            <PropertyRef Name="LanguageId" />
+          </Key>
+          <Property Name="TranslationId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Modified" Type="DateTimeOffset" Nullable="false" Precision="3" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+          <Property Name="UpdateVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_TranslationEntry_Language" FromRole="TranslationEntry" ToRole="Language" />
+          <NavigationProperty Name="Translation" Relationship="Self.FK_TranslationEntry_Translation" FromRole="TranslationEntry" ToRole="Translation" />
+        </EntityType>
+        <Association Name="FK_FoodShop_Desription">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="0..1" />
+          <End Role="FoodShop" Type="Self.FoodShop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodShop">
+              <PropertyRef Name="DescriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FoodShop_Name">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="1" />
+          <End Role="FoodShop" Type="Self.FoodShop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FoodShop">
+              <PropertyRef Name="NameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Menu_FoodShop">
           <End Role="FoodShop" Type="Self.FoodShop" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -294,6 +537,18 @@
             </Principal>
             <Dependent Role="MenuItemIngredient">
               <PropertyRef Name="IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TranslationEntry_Language">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="TranslationEntry" Type="Self.TranslationEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationEntry">
+              <PropertyRef Name="LanguageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -325,13 +580,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RecameEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_TranslationEntry_Translation">
+          <End Role="Translation" Type="Self.Translation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TranslationEntry" Type="Self.TranslationEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Translation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TranslationEntry">
+              <PropertyRef Name="TranslationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RecameDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="FoodShops" EntityType="Self.FoodShop" />
           <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
           <EntitySet Name="Menus" EntityType="Self.Menu" />
           <EntitySet Name="MenuItems" EntityType="Self.MenuItem" />
           <EntitySet Name="MenuItemIngredients" EntityType="Self.MenuItemIngredient" />
+          <EntitySet Name="Translations" EntityType="Self.Translation" />
+          <EntitySet Name="TranslationEntries" EntityType="Self.TranslationEntry" />
+          <AssociationSet Name="FK_FoodShop_Desription" Association="Self.FK_FoodShop_Desription">
+            <End Role="Translation" EntitySet="Translations" />
+            <End Role="FoodShop" EntitySet="FoodShops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FoodShop_Name" Association="Self.FK_FoodShop_Name">
+            <End Role="Translation" EntitySet="Translations" />
+            <End Role="FoodShop" EntitySet="FoodShops" />
+          </AssociationSet>
           <AssociationSet Name="FK_Menu_FoodShop" Association="Self.FK_Menu_FoodShop">
             <End Role="FoodShop" EntitySet="FoodShops" />
             <End Role="Menu" EntitySet="Menus" />
@@ -339,6 +619,10 @@
           <AssociationSet Name="FK_MenuItemIngredient_IngredientId" Association="Self.FK_MenuItemIngredient_IngredientId">
             <End Role="Ingredient" EntitySet="Ingredients" />
             <End Role="MenuItemIngredient" EntitySet="MenuItemIngredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TranslationEntry_Language" Association="Self.FK_TranslationEntry_Language">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="TranslationEntry" EntitySet="TranslationEntries" />
           </AssociationSet>
           <AssociationSet Name="FK_MenuItem_MenuId" Association="Self.FK_MenuItem_MenuId">
             <End Role="Menu" EntitySet="Menus" />
@@ -348,25 +632,33 @@
             <End Role="MenuItem" EntitySet="MenuItems" />
             <End Role="MenuItemIngredient" EntitySet="MenuItemIngredients" />
           </AssociationSet>
+          <AssociationSet Name="FK_TranslationEntry_Translation" Association="Self.FK_TranslationEntry_Translation">
+            <End Role="Translation" EntitySet="Translations" />
+            <End Role="TranslationEntry" EntitySet="TranslationEntries" />
+          </AssociationSet>
           <FunctionImport Name="fn_FoodShop" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnFoodShop)">
-          <Parameter Name="Language" Mode="In" Type="String" />
+          <Parameter Name="lang" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="fn_Ingredient" IsComposable="true" ReturnType="Collection(Recame.DBModel.fn_Ingredient_Result)" />
+          <FunctionImport Name="fn_Ingredient" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnIngredient)" />
           <FunctionImport Name="fn_Menu" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnMenu)" />
           <FunctionImport Name="fn_MenuItem" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnMenuItem)" />
           <FunctionImport Name="fn_MenuItemIngredient" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnMenuItemIngredient)" />
+          <FunctionImport Name="fn_Translation" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnTranslation)">
+          <Parameter Name="Language" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="fn_TranslationEntry" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnTranslationEntry)">
+          <Parameter Name="TranslationId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fn_TranslationEntryDef" IsComposable="true" ReturnType="Collection(Recame.DBModel.fnTranslationEntryDef)">
+          <Parameter Name="Language" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="fnFoodShop">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RecameDBModelStoreContainer" CdmEntityContainer="RecameEntities">
+        <EntityContainerMapping StorageEntityContainer="RecameDBModelStoreContainer" CdmEntityContainer="RecameDBEntities">
           <EntitySetMapping Name="C__RefactorLog">
             <EntityTypeMapping TypeName="Recame.DBModel.C__RefactorLog">
               <MappingFragment StoreEntitySet="__RefactorLog">
@@ -378,8 +670,9 @@
             <EntityTypeMapping TypeName="Recame.DBModel.FoodShop">
               <MappingFragment StoreEntitySet="FoodShop">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameId" ColumnName="NameId" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DescriptionId" ColumnName="DescriptionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -389,6 +682,17 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="Recame.DBModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NumId" ColumnName="NumId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EnName" ColumnName="EnName" />
+                <ScalarProperty Name="ISOCode" ColumnName="ISOCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -420,18 +724,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Translations">
+            <EntityTypeMapping TypeName="Recame.DBModel.Translation">
+              <MappingFragment StoreEntitySet="Translation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="UpdateVersion" ColumnName="UpdateVersion" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TranslationEntries">
+            <EntityTypeMapping TypeName="Recame.DBModel.TranslationEntry">
+              <MappingFragment StoreEntitySet="TranslationEntry">
+                <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="UpdateVersion" ColumnName="UpdateVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionName="Recame.DBModel.Store.fn_FoodShop" FunctionImportName="fn_FoodShop">
-          <ResultMapping>
+            <ResultMapping>
               <ComplexTypeMapping TypeName="Recame.DBModel.fnFoodShop">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="NameId" ColumnName="NameId" />
+                <ScalarProperty Name="DescriptionId" ColumnName="DescriptionId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionName="Recame.DBModel.Store.fn_Ingredient" FunctionImportName="fn_Ingredient">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Recame.DBModel.fn_Ingredient_Result">
+              <ComplexTypeMapping TypeName="Recame.DBModel.fnIngredient">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -463,6 +796,37 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
                 <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Recame.DBModel.Store.fn_Translation" FunctionImportName="fn_Translation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Recame.DBModel.fnTranslation">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ObjectType" ColumnName="ObjectType" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Recame.DBModel.Store.fn_TranslationEntry" FunctionImportName="fn_TranslationEntry">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Recame.DBModel.fnTranslationEntry">
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Recame.DBModel.Store.fn_TranslationEntryDef" FunctionImportName="fn_TranslationEntryDef">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Recame.DBModel.fnTranslationEntryDef">
+                <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

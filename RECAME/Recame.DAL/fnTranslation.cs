@@ -11,13 +11,13 @@ namespace Recame.DAL
 {
     using System;
     
-    public partial class fnFoodShop
+    public partial class fnTranslation
     {
+        public string Language { get; set; }
         public int Id { get; set; }
-        public int Type { get; set; }
-        public int NameId { get; set; }
-        public Nullable<int> DescriptionId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int ObjectType { get; set; }
+        public string Key { get; set; }
+        public System.DateTimeOffset Modified { get; set; }
+        public string Text { get; set; }
     }
 }

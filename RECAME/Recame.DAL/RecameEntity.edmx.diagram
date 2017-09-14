@@ -4,17 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e1fbff0a7bf54b228392db13cb95c622" Name="Diagram1">
-        <EntityTypeShape EntityType="Recame.DBModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Recame.DBModel.FoodShop" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Recame.DBModel.Ingredient" Width="1.5" PointX="5.375" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Recame.DBModel.Menu" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Recame.DBModel.MenuItem" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Recame.DBModel.MenuItemIngredient" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="108019acb5bf4324ab11660d766b1383" Name="Diagram1">
+        <EntityTypeShape EntityType="Recame.DBModel.C__RefactorLog" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Recame.DBModel.FoodShop" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Recame.DBModel.Ingredient" Width="1.5" PointX="7.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Recame.DBModel.Language" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Recame.DBModel.Menu" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Recame.DBModel.MenuItem" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Recame.DBModel.MenuItemIngredient" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Recame.DBModel.Translation" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Recame.DBModel.TranslationEntry" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Recame.DBModel.FK_FoodShop_Desription" ManuallyRouted="false" />
+        <AssociationConnector Association="Recame.DBModel.FK_FoodShop_Name" ManuallyRouted="false" />
         <AssociationConnector Association="Recame.DBModel.FK_Menu_FoodShop" ManuallyRouted="false" />
         <AssociationConnector Association="Recame.DBModel.FK_MenuItemIngredient_IngredientId" ManuallyRouted="false" />
+        <AssociationConnector Association="Recame.DBModel.FK_TranslationEntry_Language" ManuallyRouted="false" />
         <AssociationConnector Association="Recame.DBModel.FK_MenuItem_MenuId" ManuallyRouted="false" />
         <AssociationConnector Association="Recame.DBModel.FK_MenuItemIngredient_MenuItemId" ManuallyRouted="false" />
+        <AssociationConnector Association="Recame.DBModel.FK_TranslationEntry_Translation" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

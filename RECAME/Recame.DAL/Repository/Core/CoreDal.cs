@@ -17,7 +17,7 @@ namespace Recame.DAL.Repository.Core
             }
         }
 
-        protected RecameEntities db
+        protected RecameDBEntities db
         {
             get
             {

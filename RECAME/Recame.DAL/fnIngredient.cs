@@ -11,13 +11,10 @@ namespace Recame.DAL
 {
     using System;
     
-    public partial class fnFoodShop
+    public partial class fnIngredient
     {
         public int Id { get; set; }
-        public int Type { get; set; }
-        public int NameId { get; set; }
-        public Nullable<int> DescriptionId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Type { get; set; }
     }
 }

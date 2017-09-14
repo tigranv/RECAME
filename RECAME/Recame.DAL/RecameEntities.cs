@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Recame.DAL
 {
-    public partial class RecameEntities : IRecameEntities
+    public partial class RecameDBEntities : IRecameEntities
     {
         private static readonly string UpdateVersionPropName = CommonUtils.GetPropertyPath<IObjectVersion>(x => x.UpdateVersion);
         private readonly bool isReadOnly;
-        public RecameEntities(string connectionStr, bool isReadOnly = false)
+        public RecameDBEntities(string connectionStr, bool isReadOnly = false)
             : base("name=" + connectionStr)
         {
             this.Configuration.LazyLoadingEnabled = false;
@@ -25,7 +25,7 @@ namespace Recame.DAL
             if (isReadOnly)
                 this.Database.CommandTimeout = 120;
         }
-        public RecameEntities(string connectionStr)
+        public RecameDBEntities(string connectionStr)
                 : base(connectionStr)
         {
             this.Configuration.LazyLoadingEnabled = false;

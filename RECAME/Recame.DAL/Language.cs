@@ -12,22 +12,21 @@ namespace Recame.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class FoodShop
+    public partial class Language
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FoodShop()
+        public Language()
         {
-            this.Menus = new HashSet<Menu>();
+            this.TranslationEntries = new HashSet<TranslationEntry>();
         }
     
-        public int Id { get; set; }
-        public int NameId { get; set; }
-        public int Type { get; set; }
-        public Nullable<int> DescriptionId { get; set; }
+        public string Id { get; set; }
+        public int NumId { get; set; }
+        public string Name { get; set; }
+        public string EnName { get; set; }
+        public string ISOCode { get; set; }
     
-        public virtual Translation Translation { get; set; }
-        public virtual Translation Translation1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menu> Menus { get; set; }
+        public virtual ICollection<TranslationEntry> TranslationEntries { get; set; }
     }
 }

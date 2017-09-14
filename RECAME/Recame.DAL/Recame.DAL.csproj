@@ -63,6 +63,9 @@
     <Compile Include="fnFoodShop.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="fnIngredient.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="fnMenu.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
@@ -72,7 +75,13 @@
     <Compile Include="fnMenuItemIngredient.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="fn_Ingredient_Result.cs">
+    <Compile Include="fnTranslation.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fnTranslationEntry.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fnTranslationEntryDef.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="FoodShop.cs">
@@ -88,6 +97,9 @@
     <Compile Include="Interfaces\Repository\IFoodShopDal.cs" />
     <Compile Include="Interfaces\Repository\IQueryBuilder.cs" />
     <Compile Include="IRecameEntities.cs" />
+    <Compile Include="Language.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <DependentUpon>RecameEntity.tt</DependentUpon>
     </Compile>
@@ -118,31 +130,23 @@
     <Compile Include="Repository\Core\CoreDal.cs" />
     <Compile Include="Repository\Core\IBaseDal.cs" />
     <Compile Include="Repository\FoodShopDal.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="RecameEntity.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RecameEntity.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="Translation.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TranslationEntry.cs">
+      <DependentUpon>RecameEntity.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="RecameEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RecameEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="RecameEntity.edmx.diagram">
       <DependentUpon>RecameEntity.edmx</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="RecameEntity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RecameEntity.Context.cs</LastGenOutput>
-      <DependentUpon>RecameEntity.edmx</DependentUpon>
-    </Content>
-    <Content Include="RecameEntity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RecameEntity.edmx</DependentUpon>
-      <LastGenOutput>RecameEntity.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -152,6 +156,18 @@
       <Project>{d78786b9-5a86-49df-ac2a-6c7ddeba9cbf}</Project>
       <Name>Recame.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RecameEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RecameEntity.edmx</DependentUpon>
+      <LastGenOutput>RecameEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="RecameEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RecameEntity.edmx</DependentUpon>
+      <LastGenOutput>RecameEntity.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

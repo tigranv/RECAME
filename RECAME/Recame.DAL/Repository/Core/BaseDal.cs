@@ -14,27 +14,27 @@ namespace Recame.DAL.Repository.Core
 {
     public class BaseDal : IBaseDal, IQueryBuilder
     {
-        private RecameEntities _db;
+        private RecameDBEntities _db;
 
         private readonly bool _contextCreatedHere;
 
         protected DbContextTransaction Transaction { get; private set; }
 
-        public BaseDal(RecameEntities db = null, bool isReadOnly = false)
+        public BaseDal(RecameDBEntities db = null, bool isReadOnly = false)
         {
             if (null == db)
             {
                 if (isReadOnly)
-                    db = new RecameEntities(Constants.Others.ReadOnlyDbConnectionName, true);
+                    db = new RecameDBEntities(Constants.Others.ReadOnlyDbConnectionName, true);
                 else
-                    db = new RecameEntities();
+                    db = new RecameDBEntities();
                 _contextCreatedHere = true;
             }
 
             _db = db;
         }
 
-        protected internal RecameEntities db
+        protected internal RecameDBEntities db
         {
             get { return _db; }
         }
