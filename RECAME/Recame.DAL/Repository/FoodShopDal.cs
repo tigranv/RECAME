@@ -16,6 +16,11 @@ namespace Recame.DAL.Repository
         {
         }
 
+        public FoodShopDal()
+        {
+
+        }
+
         public FoodShop GetFoodShopById(int id)
         {
             return db.FoodShops.FirstOrDefault(x => x.Id == id);
