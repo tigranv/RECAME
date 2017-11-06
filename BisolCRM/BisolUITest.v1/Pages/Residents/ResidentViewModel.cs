@@ -24,7 +24,7 @@ namespace BisolUITest.v1.Pages.Residents
         {
             using (var BDal = new BaseDal())
             {
-                filter.MaxRows = 10;
+                filter.MaxRows = 1000;
                 ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(  BDal.RESIDENTCONTRACTDal.GetRESIDENTCONTRACTs(filter));
 
             }

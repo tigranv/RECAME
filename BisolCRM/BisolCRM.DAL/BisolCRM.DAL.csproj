@@ -169,6 +169,7 @@
     <Compile Include="DataContracts\Filters\FilterTAWDBRESCONTRACTCALC.cs" />
     <Compile Include="DataContracts\ModelBase.cs" />
     <Compile Include="DataContracts\PartialClasses\RESIDENTCONTRACT.cs" />
+    <Compile Include="DataContracts\PartialClasses\TAWDBREGION.cs" />
     <Compile Include="DataContracts\PartialClasses\TAWDBRESCONTRACTCALC.cs" />
     <Compile Include="DataContracts\SessionInfo.cs" />
     <Compile Include="fnRESIDENTCONTRACT.cs">
@@ -231,12 +232,16 @@
     <Compile Include="Interfaces\IObjectVersion.cs" />
     <Compile Include="Interfaces\Repository\IQueryBuilder.cs" />
     <Compile Include="Interfaces\Repository\IRESIDENTCONTRACTDal.cs" />
+    <Compile Include="Interfaces\Repository\ITAWDBBRANCHDal.cs" />
+    <Compile Include="Interfaces\Repository\ITAWDBREGIONDal.cs" />
     <Compile Include="Interfaces\Repository\ITAWDBRESCONTRACTCALCDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Core\BaseDal.cs" />
     <Compile Include="Repository\Core\CoreDal.cs" />
     <Compile Include="Repository\Core\IBaseDal.cs" />
     <Compile Include="Repository\RESIDENTCONTRACTDal.cs" />
+    <Compile Include="Repository\TAWDBBRANCHDal.cs" />
+    <Compile Include="Repository\TAWDBREGIONDal.cs" />
     <Compile Include="Repository\TAWDBRESCONTRACTCALCDal.cs" />
     <Compile Include="RESIDENTCONTRACT.cs">
       <DependentUpon>BisolDBModel.tt</DependentUpon>

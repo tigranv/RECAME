@@ -298,5 +298,31 @@ namespace BisolCRM.DAL.Repository.Core
                 _rESIDENTCONTRACTDal = value;
             }
         }
+
+        private ITAWDBBRANCHDal _tAWDBBRANCHDal;
+        public ITAWDBBRANCHDal TAWDBBRANCHDal
+        {
+            get
+            {
+                return _tAWDBBRANCHDal ?? (_tAWDBBRANCHDal = new TAWDBBRANCHDal(this));
+            }
+            set
+            {
+                _tAWDBBRANCHDal = value;
+            }
+        }
+
+        private ITAWDBREGIONDal _tAWDBREGIONDal;
+        public ITAWDBREGIONDal TAWDBREGIONDal
+        {
+            get
+            {
+                return _tAWDBREGIONDal ?? (_tAWDBREGIONDal = new TAWDBREGIONDal(this));
+            }
+            set
+            {
+                _tAWDBREGIONDal = value;
+            }
+        }
     }
 }
