@@ -6,12 +6,15 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
-    <Grid Style="{StaticResource ContentRoot}">
-        <mui:ModernTab Layout="List">
-            <mui:ModernTab.Links>
-                <mui:Link DisplayName="Resident"  Source="/Pages/Residents/Resident.xaml" />
-                <mui:Link DisplayName="Organization" Source="/Pages/Organizations/Organization.xaml" />
-            </mui:ModernTab.Links>
-        </mui:ModernTab>
-    </Grid>
+    <Border BorderBrush="Black" BorderThickness="2">
+        <Grid>
+            <mui:ModernTab Layout="List" HorizontalContentAlignment="Left" HorizontalAlignment="Left" ListWidth="100">
+                <mui:ModernTab.Links>
+                    <mui:Link DisplayName="Resident"  Source="/Pages/Residents/Resident.xaml"  />
+                    <mui:Link DisplayName="Organization" Source="/Pages/Organizations/Organization.xaml" />
+                </mui:ModernTab.Links>
+            </mui:ModernTab>
+        </Grid>
+    </Border>
+    
 </UserControl>
