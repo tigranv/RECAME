@@ -7,11 +7,10 @@
              >
 
     <Grid>
-        <ScrollViewer>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120" />
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition  Height="60"/>
@@ -44,30 +43,29 @@
 
                 <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5, 0, 0.5, 0.5" >
                     <Grid >
-                        <StackPanel>
-                            <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="8" ItemsSource="{Binding ResidentsList}">
-                                <ListView.View>
-                                    <GridView >
-                                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </StackPanel>
+                        <ListView ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="8" ItemsSource="{Binding ResidentsList}">
+                            <ListView.View>
+                                <GridView >
+                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        
                     </Grid>
+                   
                 </Border>
 
             </Grid>
 
-        </ScrollViewer>
 
     </Grid>
 

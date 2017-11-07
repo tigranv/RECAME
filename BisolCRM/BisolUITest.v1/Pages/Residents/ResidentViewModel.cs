@@ -25,7 +25,7 @@ namespace BisolUITest.v1.Pages.Residents
             using (var BDal = new BaseDal())
             {
                 filter.MaxRows = 1000;
-                ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(  BDal.RESIDENTCONTRACTDal.GetRESIDENTCONTRACTs(filter));
+                ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(GetResidentTestList());// BDal.RESIDENTCONTRACTDal.GetRESIDENTCONTRACTs(filter));
 
             }
 
@@ -62,6 +62,17 @@ namespace BisolUITest.v1.Pages.Residents
         //    }
         //}
 
+        private List<fnRESIDENTCONTRACT> GetResidentTestList()
+        {
+            var list = new List<fnRESIDENTCONTRACT>();
 
+            for (int i = 0; i < 100; i++)
+            {
+                var resident = new fnRESIDENTCONTRACT() {ID = i, BRANCH = i, CITY = 1111, FAMILY = "fffff", FATHERNAME = "gggg", STREET = "yyyy", HOUSE = "tttt", NAME = "nnnn" };
+                list.Add(resident);
+            }
+
+            return list;
+        }
     }
 }
