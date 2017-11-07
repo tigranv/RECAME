@@ -7,40 +7,42 @@
              >
 
     <Grid>
-
+        <ScrollViewer>
             <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="120"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition  Height="60"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="0, 0, 0, 2">
+                    <Grid >
+                        <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
+                            <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
+                            <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="10" />
+                            <TextBlock Grid.Row="1" Text="Font size:" VerticalAlignment="Center" Margin="10" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                
 
 
-            <Grid Grid.Row="0" Grid.Column = "0">
-                <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
-                    <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
-                    <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="10" />
-                    <TextBlock Grid.Row="1" Text="Font size:" VerticalAlignment="Center" Margin="10" />
-                </StackPanel>
-            </Grid>
+                <Grid  Grid.Column="0" Grid.Row="1" Margin="10">
 
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Filter" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
+                        <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="0,0,16,4" />
+                        <ComboBox  ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
+                        <TextBlock Text="Font size:" VerticalAlignment="Center" Margin="0,0,16,0" />
+                        <ComboBox  ItemsSource="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize, Mode=TwoWay}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
 
-            <Grid Grid.RowSpan = "2" Grid.Column="1" Grid.Row="1" Margin="10">
-
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Filter" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
-                    <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="0,0,16,4" />
-                    <ComboBox  ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
-                    <TextBlock Text="Font size:" VerticalAlignment="Center" Margin="0,0,16,0" />
-                    <ComboBox  ItemsSource="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize, Mode=TwoWay}" VerticalAlignment="Center" />
-                </StackPanel>
-            </Grid>
-
-                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1" >
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5, 0, 0.5, 0.5" >
                     <Grid >
                         <StackPanel>
                             <ListView ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="8" ItemsSource="{Binding ResidentsList}">
@@ -61,9 +63,11 @@
                             </ListView>
                         </StackPanel>
                     </Grid>
-            </Border>
+                </Border>
 
-        </Grid>
+            </Grid>
+
+        </ScrollViewer>
 
     </Grid>
 
