@@ -3,11 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BisolUITest.v1"
-
-             
-             mc:Ignorable="d" 
-             >
+             xmlns:local="clr-namespace:BisolUITest.v1"             
+             mc:Ignorable="d" >
 
     <Grid>
 
@@ -26,19 +23,48 @@
                 <Grid >
                     <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
                         <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
-                        <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="10" />
-                        <TextBlock Grid.Row="1" Text="Extract as excel:" VerticalAlignment="Center" Margin="10" />
 
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource ImageXls}"
-                                    Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource ImagePDF}"
-                                    Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource ImageAddres}"
-                                    Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="70" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource ImageUpdate}"
-                                    Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
                         
 
+                        
+                   
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource ImageAdd}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource Imageedit}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource Imageremove}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+
+
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource ImageXls2}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource ImagePDF1}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource ImageXlsx}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource Imagesearch}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource ImagedDownload}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource ImageXls}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        
+
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource ImagePDF5}"
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
                     </StackPanel>
                 </Grid>
