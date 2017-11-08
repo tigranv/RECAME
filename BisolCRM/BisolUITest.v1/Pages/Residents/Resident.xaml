@@ -10,35 +10,43 @@
              >
 
     <Grid>
-        
-        <Grid HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition  Height="60"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="30"/>
-                </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="0, 0, 0, 2">
-                    <Grid >
-                        <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
-                            <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
-                            <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="10" />
-                            <TextBlock Grid.Row="1" Text="Extract as excel:" VerticalAlignment="Center" Margin="10" />
-                       
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource MyImage}"
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="0, 0, 0, 2">
+                <Grid >
+                    <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
+                        <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
+                        <TextBlock Text="Theme:" VerticalAlignment="Center" Margin="10" />
+                        <TextBlock Grid.Row="1" Text="Extract as excel:" VerticalAlignment="Center" Margin="10" />
+
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource ImageXls}"
                                     Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource ImagePDF}"
+                                    Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource ImageAddres}"
+                                    Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        <Button BorderThickness="0" Margin="2" Height="50" Width="70" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{StaticResource ImageUpdate}"
+                                    Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                        
+
 
                     </StackPanel>
-                    </Grid>
-                </Border>
-                
+                </Grid>
+            </Border>
 
 
-                <Grid  Grid.Column="0" Grid.Row="1" Margin="10">
+
+            <Grid  Grid.Column="0" Grid.Row="1" Margin="10">
 
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Filter" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
@@ -47,7 +55,7 @@
                     <TextBlock Text="Font size:" VerticalAlignment="Center" Margin="0,0,16,0" />
                     <ComboBox  ItemsSource="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize, Mode=TwoWay}" VerticalAlignment="Center" />
                     <StackPanel Orientation="Horizontal">
-                        
+
                     </StackPanel>
                     <Button Style="{StaticResource dialogButton}"
                                         Content="Ok"
@@ -55,13 +63,13 @@
                     <Button Height="25" Width="35" Content="Ok"></Button>
                     <Button Height="25" Width="60" Content="Clear"></Button>
 
-                    
+
 
                 </StackPanel>
-                </Grid>
+            </Grid>
 
             <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5, 0, 0.5, 0.5" >
-                    <Grid >
+                <Grid >
                     <ListView  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="8" ItemsSource="{Binding ResidentsList}">
                         <ListView.Resources>
                             <Style TargetType="{x:Type GridViewColumnHeader}">
@@ -69,26 +77,26 @@
                             </Style>
                         </ListView.Resources>
                         <ListView.View >
-                                <GridView >
-                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        
-                    </Grid>
-                   
-                </Border>
+                            <GridView >
+                                <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
 
-            </Grid>
+                </Grid>
+
+            </Border>
+
+        </Grid>
 
 
     </Grid>
