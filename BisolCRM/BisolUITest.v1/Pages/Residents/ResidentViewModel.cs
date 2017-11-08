@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace BisolUITest.v1.Pages.Residents
@@ -26,7 +27,7 @@ namespace BisolUITest.v1.Pages.Residents
             {
                 filter.MaxRows = 1000;
                 //ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(GetResidentTestList());
-                ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(BDal.RESIDENTCONTRACTDal.GetRESIDENTCONTRACTs(filter));
+                //ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(BDal.RESIDENTCONTRACTDal.GetRESIDENTCONTRACTs(filter));
 
             }
 
@@ -75,5 +76,22 @@ namespace BisolUITest.v1.Pages.Residents
 
             return list;
         }
+
+        #region Commands
+        private ICommand _convertToXlsCommand;
+
+        public ICommand ConvertToXlsCommand
+        {
+            get { return _convertToXlsCommand ?? (_convertToXlsCommand = new RelayCommand(ConvertToXlsExecute)); }
+        }
+
+        private void ConvertToXlsExecute(object obj)
+        {
+            ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(GetResidentTestList());
+
+        }
+
+
+        #endregion
     }
 }
