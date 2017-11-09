@@ -43,7 +43,6 @@ namespace BisolUITest.v1.Pages.Residents
                 //ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(BDal.RESIDENTCONTRACTDal.GetRESIDENTCONTRACTs(filter));
 
             }
-            backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.DoWork += DoWork;
             // not required for this question, but is a helpful event to handle
 
@@ -53,6 +52,7 @@ namespace BisolUITest.v1.Pages.Residents
         private void DoWork(object sender, DoWorkEventArgs e)
         {
             ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(GetResidentTestList());
+            ProgresBarFlag = false;
         }
 
         public ObservableCollection<fnRESIDENTCONTRACT> ResidentsList
@@ -93,7 +93,7 @@ namespace BisolUITest.v1.Pages.Residents
             }
         }
 
-        private async void ConvertToXlsExecute(object obj)
+        private void ConvertToXlsExecute(object obj)
         {
             ProgresBarFlag = true;
 
