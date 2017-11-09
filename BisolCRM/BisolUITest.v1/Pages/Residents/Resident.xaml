@@ -5,31 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BisolUITest.v1"
              xmlns:src="clr-namespace:CustomControls;assembly=MultiComboBox"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+
              mc:Ignorable="d" >
 
-    <DockPanel>
-        <Grid>
+    <Border  BorderBrush="Black" BorderThickness="2, 2, 2, 2" >
+
+        <DockPanel>
+            <Grid>
 
 
-            <Grid HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition  />
-                    <ColumnDefinition Width="200"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition  Height="60"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="30"/>
-                </Grid.RowDefinitions>
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  />
+                        <ColumnDefinition Width="250"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="60"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="0, 0, 0, 2">
-                    <Grid >
+                    <Border Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="0, 0, 0, 2">
                         <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
                             <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
-
-
-
-
 
                             <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImageAdd}"
@@ -64,103 +62,105 @@
                                 Content="{StaticResource ImageXls}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
-
                             <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImagePDF5}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
+                            
+
+
                         </StackPanel>
-                    </Grid>
-                </Border>
+
+                    </Border>
 
 
 
-                <Grid  Grid.Column="1" Grid.Row="1" Margin="10">
+                    <Grid  Name="Filter" Grid.Column="1" Grid.Row="1" Margin="10">
 
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Filter" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
-                        <ComboBox  ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
+                        <StackPanel Orientation="Vertical">
+                            <!--<ComboBox  ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />-->
 
 
-                        <GroupBox Grid.Row="1" Margin="0,10,0,0"  Header="Filter Residents" FontSize="15">
-                            <Grid Margin="5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
+                            <GroupBox Grid.Row="1" Margin="0,10,0,0"  Header="Filter Residents" FontSize="18">
+                                <Grid Margin="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
-                                <TextBlock Text="Selected Items Viewed in Text Box:" />
-                                <TextBox Margin="0,5,0,0" Grid.Row="1"
+                                    <TextBlock Text="Selected Items Viewed in Text Box:"  FontSize="12"/>
+                                    <TextBox Margin="0,5,0,0" Grid.Row="1"
                          Text="{Binding Path=SelectedAnimalsText, Mode=OneWay}" />
 
-                                <TextBlock Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" 
+                                    <TextBlock Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" 
                            TextWrapping="Wrap"
-                           Text="Two Multi Select Combo Boxs, which stay in sync because they are bound to the same ObservableCollection: "  
-                           />
+                           Text="Two Multi Select Combo Boxs, which stay in sync because they are bound to the same ObservableCollection: " FontSize="12" />
 
 
-                                <src:MultiComboBox Margin="0,5,0,0" Name="selectedItems1" Grid.Row="3" SelectionMode="Multiple" 
+                                    <src:MultiComboBox Margin="0,5,0,0" Name="selectedItems1" Grid.Row="3" SelectionMode="Multiple" 
                                  VerticalAlignment="Center"
                                  ItemsSource="{Binding Animals}"
                                  SelectedItems="{Binding SelectedAnimals}">
-                                    <src:MultiComboBox.DisplaySeparator>
-                                        <Ellipse Margin="3,0" Height="4" Width="4" Fill="Black"/>
-                                    </src:MultiComboBox.DisplaySeparator>
-                                </src:MultiComboBox>
+                                        <src:MultiComboBox.DisplaySeparator>
+                                            <Ellipse Margin="3,0" Height="4" Width="4" Fill="Black"/>
+                                        </src:MultiComboBox.DisplaySeparator>
+                                    </src:MultiComboBox>
 
-                                <src:MultiComboBox Margin="0,10,0,0" Grid.Row="4" SelectionMode="Multiple" 
+                                    <src:MultiComboBox Margin="0,10,0,0" Grid.Row="4" SelectionMode="Multiple" 
                                  VerticalAlignment="Center"
                                  IsCreateNewEnabled="True"
                                  DisplaySeparator=", "
                                  ItemsSource="{Binding Animals}"
                                  SelectedItems="{Binding SelectedAnimals}">
 
-                                </src:MultiComboBox>
-                            </Grid>
-                        </GroupBox>
+                                    </src:MultiComboBox>
+                                </Grid>
+                            </GroupBox>
 
-                    </StackPanel>
+                        </StackPanel>
 
-
-                </Grid>
-
-                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0.5, 0, 0.5, 0.5" >
-                    <Grid >
-                        <ListView  ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="8" ItemsSource="{Binding ResidentsList}">
-                            <ListView.Resources>
-                                <Style TargetType="{x:Type GridViewColumnHeader}">
-                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                </Style>
-                            </ListView.Resources>
-                            <ListView.View >
-                                <GridView >
-                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
 
                     </Grid>
 
-                </Border>
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0, 0, 1, 1" >
+                        <Grid>
+                            <mui:ModernProgressRing IsActive="{Binding ProgresBarFlag}" Width="80" Height="80" Style="{Binding SelectedItem.Tag, ElementName=CmbRingStyle}" />
+
+                            <ListView  ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="8" ItemsSource="{Binding ResidentsList}">
+                                <ListView.Resources>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                    </Style>
+                                </ListView.Resources>
+                                <ListView.View >
+                                    <GridView >
+                                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
 
             </Grid>
 
+        </DockPanel>
 
-        </Grid>
-
-    </DockPanel>
-  
-
+    </Border>
 </UserControl>

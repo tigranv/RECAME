@@ -8,9 +8,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace BisolUITest.v1.Pages.Residents
 {
@@ -18,7 +20,18 @@ namespace BisolUITest.v1.Pages.Residents
     {
         public ObservableCollection<fnRESIDENTCONTRACT> _residentsList;
         public FilterRESIDENTCONTRACT filter = new FilterRESIDENTCONTRACT();
+        private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
+        private bool _progresBarFlag;
+        public bool ProgresBarFlag
+        {
+            get { return _progresBarFlag; }
+            set
+            {
+                _progresBarFlag = value;
+                OnPropertyChanged("ProgresBarFlag");
+            }
+        }
 
 
         public ResidentViewModel()
@@ -30,11 +43,17 @@ namespace BisolUITest.v1.Pages.Residents
                 //ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(BDal.RESIDENTCONTRACTDal.GetRESIDENTCONTRACTs(filter));
 
             }
-
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.DoWork += DoWork;
+            // not required for this question, but is a helpful event to handle
 
         }
 
 
+        private void DoWork(object sender, DoWorkEventArgs e)
+        {
+            ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(GetResidentTestList());
+        }
 
         public ObservableCollection<fnRESIDENTCONTRACT> ResidentsList
         {
@@ -50,30 +69,16 @@ namespace BisolUITest.v1.Pages.Residents
         }
 
 
-        //public Link SelectedTheme
-        //{
-        //    get { return this.selectedTheme; }
-        //    set
-        //    {
-        //        if (this.selectedTheme != value)
-        //        {
-        //            this.selectedTheme = value;
-        //            OnPropertyChanged("SelectedTheme");
-
-        //        }
-        //    }
-        //}
-
         private List<fnRESIDENTCONTRACT> GetResidentTestList()
         {
             var list = new List<fnRESIDENTCONTRACT>();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
-                var resident = new fnRESIDENTCONTRACT() {ID = i, BRANCH = i, CITY = 1111, FAMILY = "fffff", FATHERNAME = "gggg", STREET = "yyyy", HOUSE = "tttt", NAME = "nnnn" };
+                var resident = new fnRESIDENTCONTRACT() { ID = i, BRANCH = i, CITY = 1111, FAMILY = "fffff", FATHERNAME = "gggg", STREET = "yyyy", HOUSE = "tttt", NAME = "nnnn" };
                 list.Add(resident);
+                Thread.Sleep(5);
             }
-
             return list;
         }
 
@@ -82,12 +87,18 @@ namespace BisolUITest.v1.Pages.Residents
 
         public ICommand ConvertToXlsCommand
         {
-            get { return _convertToXlsCommand ?? (_convertToXlsCommand = new RelayCommand(ConvertToXlsExecute)); }
+            get
+            {
+                return _convertToXlsCommand ?? (_convertToXlsCommand = new RelayCommand(ConvertToXlsExecute));
+            }
         }
 
-        private void ConvertToXlsExecute(object obj)
+        private async void ConvertToXlsExecute(object obj)
         {
-            ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(GetResidentTestList());
+            ProgresBarFlag = true;
+
+            backgroundWorker.RunWorkerAsync();
+
 
         }
 
