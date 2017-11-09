@@ -5,163 +5,162 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BisolUITest.v1"
              xmlns:src="clr-namespace:CustomControls;assembly=MultiComboBox"
-             xmlns:local="clr-namespace:BisolUITest.v1"             
              mc:Ignorable="d" >
 
+    <DockPanel>
+        <Grid>
 
-             
-             mc:Ignorable="d" 
-             >
 
-    <Grid>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  />
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
 
-        <Grid HorizontalAlignment="Stretch">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="5*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition  Height="60"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="0, 0, 0, 2">
+                    <Grid >
+                        <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
+                            <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
 
-            <Border Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="0, 0, 0, 2">
-                <Grid >
-                    <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
-                        <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
 
-                        
 
-                        
-                   
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+
+
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImageAdd}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource Imageedit}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource Imageremove}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
 
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImageXls2}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImagePDF1}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImageXlsx}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource Imagesearch}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImagedDownload}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImageXls}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                        
 
-                        <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+
+                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImagePDF5}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
-                    </StackPanel>
-                </Grid>
-            </Border>
+                        </StackPanel>
+                    </Grid>
+                </Border>
 
 
 
-            <Grid  Grid.Column="0" Grid.Row="1" Margin="10">
+                <Grid  Grid.Column="1" Grid.Row="1" Margin="10">
 
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Filter" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
-                    <ComboBox  ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Filter" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
+                        <ComboBox  ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />
 
-                    
-                    <GroupBox Grid.Row="1" Margin="0,10,0,0"  Header="Filter Residents" FontSize="15">
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
 
-                            <TextBlock Text="Selected Items Viewed in Text Box:" />
-                            <TextBox Margin="0,5,0,0" Grid.Row="1"
+                        <GroupBox Grid.Row="1" Margin="0,10,0,0"  Header="Filter Residents" FontSize="15">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Selected Items Viewed in Text Box:" />
+                                <TextBox Margin="0,5,0,0" Grid.Row="1"
                          Text="{Binding Path=SelectedAnimalsText, Mode=OneWay}" />
 
-                            <TextBlock Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" 
+                                <TextBlock Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" 
                            TextWrapping="Wrap"
                            Text="Two Multi Select Combo Boxs, which stay in sync because they are bound to the same ObservableCollection: "  
                            />
 
 
-                            <src:MultiComboBox Margin="0,5,0,0" Name="selectedItems1" Grid.Row="3" SelectionMode="Multiple" 
+                                <src:MultiComboBox Margin="0,5,0,0" Name="selectedItems1" Grid.Row="3" SelectionMode="Multiple" 
                                  VerticalAlignment="Center"
                                  ItemsSource="{Binding Animals}"
                                  SelectedItems="{Binding SelectedAnimals}">
-                                <src:MultiComboBox.DisplaySeparator>
-                                    <Ellipse Margin="3,0" Height="4" Width="4" Fill="Black"/>
-                                </src:MultiComboBox.DisplaySeparator>
-                            </src:MultiComboBox>
+                                    <src:MultiComboBox.DisplaySeparator>
+                                        <Ellipse Margin="3,0" Height="4" Width="4" Fill="Black"/>
+                                    </src:MultiComboBox.DisplaySeparator>
+                                </src:MultiComboBox>
 
-                            <src:MultiComboBox Margin="0,10,0,0" Grid.Row="4" SelectionMode="Multiple" 
+                                <src:MultiComboBox Margin="0,10,0,0" Grid.Row="4" SelectionMode="Multiple" 
                                  VerticalAlignment="Center"
                                  IsCreateNewEnabled="True"
                                  DisplaySeparator=", "
                                  ItemsSource="{Binding Animals}"
                                  SelectedItems="{Binding SelectedAnimals}">
 
-                            </src:MultiComboBox>
-                        </Grid>
-                    </GroupBox>
+                                </src:MultiComboBox>
+                            </Grid>
+                        </GroupBox>
 
-                </StackPanel>
+                    </StackPanel>
 
-                
-            </Grid>
-
-            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="0.5, 0, 0.5, 0.5" >
-                <Grid >
-                    <ListView  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="8" ItemsSource="{Binding ResidentsList}">
-                        <ListView.Resources>
-                            <Style TargetType="{x:Type GridViewColumnHeader}">
-                                <Setter Property="HorizontalContentAlignment" Value="Left" />
-                            </Style>
-                        </ListView.Resources>
-                        <ListView.View >
-                            <GridView >
-                                <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
 
                 </Grid>
 
-            </Border>
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0.5, 0, 0.5, 0.5" >
+                    <Grid >
+                        <ListView  ScrollViewer.VerticalScrollBarVisibility="Visible" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="8" ItemsSource="{Binding ResidentsList}">
+                            <ListView.Resources>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.View >
+                                <GridView >
+                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
 
         </Grid>
 
-
-    </Grid>
+    </DockPanel>
+  
 
 </UserControl>
