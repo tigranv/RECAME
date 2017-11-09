@@ -1,0 +1,276 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CustomControls"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+
+    <LinearGradientBrush x:Key="ActiveButtonBrush" StartPoint="0,0" EndPoint="0,1">
+        <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#EAF6FD" Offset="0.15" />
+            <GradientStop Color="#D9F0FC" Offset=".5" />
+            <GradientStop Color="#BEE6FD" Offset=".5" />
+            <GradientStop Color="#A7D9F5" Offset="1" />
+        </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    
+    <SolidColorBrush x:Key="ActiveBorderBrush" Color="DarkBlue" />
+
+    <!-- Style for a ListBoxItem displayed inside the embedded list box, to make it a check box when mode = multiple. -->
+    <Style x:Key="CheckBoxedItemStyleKey" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border Background="Transparent">
+                        <CheckBox Focusable="false" 
+                                  Foreground="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                                  BorderBrush="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Control}}, Path=Foreground}"                                           
+                                  Content="{TemplateBinding ContentPresenter.Content}"  
+                                  IsChecked="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Style for a ListBoxItem displayed inside the embedded list box, when mode = single -->
+    <Style x:Key="NormalItemStyleKey" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border Name="border" 
+                            Margin="0,-1"
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="1"                            
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{x:Static SystemColors.HighlightBrush}" />                            
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{x:Static SystemColors.HighlightBrush}" />
+                            <Setter Property="Foreground" Value="{x:Static SystemColors.HighlightTextBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="FocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle 
+                            Margin="2"
+                            StrokeThickness="1"
+                            Stroke="#b0000000"
+                            StrokeDashArray="1 2"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CreateNewItemButtonStyle" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True" />        
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}" />        
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="TextBlock.FontSize" Value="10" />
+        <Setter Property="BorderBrush" Value="{x:Static SystemColors.WindowTextBrush}" />
+        <Setter Property="Template" >
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Padding="3,0" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter Content="{TemplateBinding Content}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ActiveButtonBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource ActiveBorderBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource ActiveButtonBrush}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource ActiveBorderBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+        
+    </Style>
+    
+    <!-- Template for the toggle button which is the main view of the control -->
+    <ControlTemplate x:Key="MultiSelectComboBoxToggleButtonTemplate" TargetType="{x:Type ToggleButton}">
+        <Border BorderThickness="{TemplateBinding BorderThickness}"  
+                    Background="{TemplateBinding Background}" 
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    SnapsToDevicePixels="true">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <ContentPresenter Content="{TemplateBinding Content}" />
+                
+                <Border Name="arrowBorder" Grid.Column="1" Width="16" BorderBrush="{TemplateBinding BorderBrush}">
+                    <Path HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                      Fill="{TemplateBinding BorderBrush}" Data="M 0 0 L 7 0 L 3.5 4 Z" />
+                </Border>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="arrowBorder" Property="Background" Value="{StaticResource ActiveButtonBrush}" />
+                <Setter TargetName="arrowBorder" Property="BorderThickness" Value="1,0,0,0" />                
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="arrowBorder" Property="Background" Value="{StaticResource ActiveButtonBrush}" />
+                <Setter TargetName="arrowBorder" Property="BorderThickness" Value="1,0,0,0" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <!-- Template for MultiComboBox - ReadOnly implies that there may be an editable version some day.  -->
+    <ControlTemplate x:Key="MultiSelectComboBoxReadOnlyTemplate" TargetType="{x:Type local:MultiComboBox}">
+        <Grid>
+            <ToggleButton Name="toggleButton" IsTabStop="False"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Template="{StaticResource MultiSelectComboBoxToggleButtonTemplate}"
+                          IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsDropDownOpen, Mode=TwoWay}" 
+                          >
+                <StackPanel Name="PART_labelContentPanel" IsHitTestVisible="False" Margin="4,0,5,0" Orientation="Horizontal"                                    
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+            </ToggleButton>
+
+            <Popup Name="PART_popup" 
+                   StaysOpen="False"
+                   AllowsTransparency="True" 
+                   Placement="Bottom"                 
+                   IsOpen="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsDropDownOpen}" 
+                   PopupAnimation="Slide">                
+                <theme:SystemDropShadowChrome Name="Shadow" Color="Transparent" 
+                                              MaxHeight="{TemplateBinding MaxDropDownHeight}" 
+                                              MinWidth="{TemplateBinding ActualWidth}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}">                       
+                        <StackPanel>
+                            <ScrollViewer MaxHeight="{TemplateBinding MaxDropDownHeight}" >
+                                <ItemsPresenter Margin="{TemplateBinding Padding}" 
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                            <Grid Name="EditBoxGrid" Visibility="Collapsed" Grid.Row="1" Margin="5" >
+                                <Button Name="ShowEditBoxButton" HorizontalAlignment="Right" 
+                                        Foreground="{TemplateBinding Foreground}"
+                                        Style="{StaticResource CreateNewItemButtonStyle}"
+                                        Content="Create New Item"
+                                        />
+                                <Border Margin="3,0,3,3" Name="NewItemEditGroup" Visibility="Collapsed">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Grid.Column="0" Background="White" Name="PART_textBoxNewItem"/>
+                                        <Button Name="PART_newItemCreatedOkButton" 
+                                            Grid.Column="1" 
+                                            Margin="3" 
+                                            Content="Ok" 
+                                            Foreground="{TemplateBinding Foreground}"
+                                            Style="{StaticResource CreateNewItemButtonStyle}"                                                       
+                                            />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </theme:SystemDropShadowChrome>
+            </Popup>
+
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger SourceName="PART_popup" Property="HasDropShadow" Value="true">
+                <Setter TargetName="Shadow" Property="Margin" Value="0,0,5,5" />
+                <Setter TargetName="Shadow" Property="Color" Value="#71000000" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource ActiveBorderBrush}" />
+            </Trigger>
+            <Trigger SourceName="toggleButton" Property="IsChecked" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource ActiveBorderBrush}" />
+            </Trigger>
+
+            <Trigger Property="IsCreateNewEnabled" Value="True">
+                <Setter TargetName="EditBoxGrid" Property="Visibility" Value="Visible" />
+            </Trigger>
+            
+            <EventTrigger SourceName="ShowEditBoxButton" RoutedEvent="Button.Click">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NewItemEditGroup" 
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimation Storyboard.TargetName="ShowEditBoxButton" 
+                                         Storyboard.TargetProperty="Opacity" 
+                                         To="0" Duration="0:0:0"/>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ShowEditBoxButton" Storyboard.TargetProperty="IsTabStop">
+                            <DiscreteBooleanKeyFrame Value="False" KeyTime="0:0:0" />
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <EventTrigger SourceName="PART_newItemCreatedOkButton" RoutedEvent="Button.Click">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="NewItemEditGroup" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Collapsed}" />
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimation Storyboard.TargetName="ShowEditBoxButton" Storyboard.TargetProperty="Opacity" 
+                                             To="1" Duration="0:0:0"/>
+                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ShowEditBoxButton" Storyboard.TargetProperty="IsTabStop">
+                            <DiscreteBooleanKeyFrame Value="True" KeyTime="0:0:0" />
+                        </BooleanAnimationUsingKeyFrames>
+
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- Style which defines the MultiComboBox -->
+    <Style TargetType="{x:Type local:MultiComboBox}">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="MinWidth" Value="120"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Foreground" Value="{x:Static SystemColors.WindowTextBrush}" />
+        <Setter Property="BorderBrush" Value="{x:Static SystemColors.WindowTextBrush}" />
+        <Setter Property="Background" Value="{x:Static SystemColors.WindowBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}" />
+        <Setter Property="Template" Value="{StaticResource MultiSelectComboBoxReadOnlyTemplate}" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource NormalItemStyleKey}" />
+        <Style.Triggers>
+            <Trigger Property="SelectionMode" Value="Single">
+                <Setter Property="ItemContainerStyle" Value="{StaticResource NormalItemStyleKey}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+</ResourceDictionary>

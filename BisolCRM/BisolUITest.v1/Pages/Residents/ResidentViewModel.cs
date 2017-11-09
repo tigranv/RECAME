@@ -20,7 +20,7 @@ namespace BisolUITest.v1.Pages.Residents
     {
         public ObservableCollection<fnRESIDENTCONTRACT> _residentsList;
         public FilterRESIDENTCONTRACT filter = new FilterRESIDENTCONTRACT();
-        private BackgroundWorker backgroundWorker = new BackgroundWorker();
+        //private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
         private bool _progresBarFlag;
         public bool ProgresBarFlag
@@ -43,17 +43,16 @@ namespace BisolUITest.v1.Pages.Residents
                 //ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(BDal.RESIDENTCONTRACTDal.GetRESIDENTCONTRACTs(filter));
 
             }
-            backgroundWorker.DoWork += DoWork;
+            //backgroundWorker.DoWork += DoWork;
             // not required for this question, but is a helpful event to handle
 
         }
 
 
-        private void DoWork(object sender, DoWorkEventArgs e)
-        {
-            ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(GetResidentTestList());
-            ProgresBarFlag = false;
-        }
+        //private void DoWork(object sender, DoWorkEventArgs e)
+        //{
+            
+        //}
 
         public ObservableCollection<fnRESIDENTCONTRACT> ResidentsList
         {
@@ -77,9 +76,15 @@ namespace BisolUITest.v1.Pages.Residents
             {
                 var resident = new fnRESIDENTCONTRACT() { ID = i, BRANCH = i, CITY = 1111, FAMILY = "fffff", FATHERNAME = "gggg", STREET = "yyyy", HOUSE = "tttt", NAME = "nnnn" };
                 list.Add(resident);
-                Thread.Sleep(5);
+                Thread.Sleep(10);
             }
             return list;
+        }
+
+        private async Task<List<fnRESIDENTCONTRACT>> LoadReport()
+        {
+            var invoices = await Task.Run(() => GetResidentTestList());
+            return invoices;
         }
 
         #region Commands
@@ -93,13 +98,11 @@ namespace BisolUITest.v1.Pages.Residents
             }
         }
 
-        private void ConvertToXlsExecute(object obj)
+        private async void ConvertToXlsExecute(object obj)
         {
             ProgresBarFlag = true;
-
-            backgroundWorker.RunWorkerAsync();
-
-
+            ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(await LoadReport());
+            ProgresBarFlag = false;
         }
 
 

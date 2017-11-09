@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleForDAL", "TestCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BisolUITest.v1", "BisolUITest.v1\BisolUITest.v1.csproj", "{52270090-81D7-4331-B14F-28254F27F893}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiComboBox", "..\..\..\..\Desktop\MultiSelectComboBox\MultiSelectComboBox\MultiComboBox.csproj", "{6E683FFD-0F53-4225-B34C-88EF47F7D062}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiComboBox", "MultiSelectComboBox\MultiSelectComboBox\MultiComboBox.csproj", "{6E683FFD-0F53-4225-B34C-88EF47F7D062}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
