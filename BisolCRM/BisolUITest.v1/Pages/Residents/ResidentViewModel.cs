@@ -1,6 +1,7 @@
 ﻿using BisolCRM.DAL;
 using BisolCRM.DAL.DataContracts.Filters;
 using BisolCRM.DAL.Repository.Core;
+using BisolUITest.v1.Helpers;
 using FirstFloor.ModernUI.Presentation;
 using System;
 using System.Collections.Generic;
@@ -76,7 +77,7 @@ namespace BisolUITest.v1.Pages.Residents
             {
                 var resident = new fnRESIDENTCONTRACT() { ID = i, BRANCH = i, CITY = 1111, FAMILY = "fffff", FATHERNAME = "gggg", STREET = "yyyy", HOUSE = "tttt", NAME = "nnnn" };
                 list.Add(resident);
-                Thread.Sleep(10);
+                //Thread.Sleep(10);
             }
             return list;
         }
@@ -100,9 +101,10 @@ namespace BisolUITest.v1.Pages.Residents
 
         private async void ConvertToXlsExecute(object obj)
         {
-            ProgresBarFlag = true;
-            ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(await LoadReport());
-            ProgresBarFlag = false;
+            Converters.CreateExcelDoc(GetResidentTestList());
+            //ProgresBarFlag = true;
+            //ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(await LoadReport());
+            //ProgresBarFlag = false;
         }
 
 

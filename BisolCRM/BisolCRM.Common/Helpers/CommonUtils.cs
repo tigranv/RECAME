@@ -21,6 +21,12 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using System.Xml.Linq;
 using System.Net.Mail;
+using System.ComponentModel;
+using System.Data;
+using System.Threading.Tasks;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace BisolCRM.Common.Helpers
 {
@@ -38,7 +44,7 @@ namespace BisolCRM.Common.Helpers
             return null;
         }
 
-        
+
 
     }
 }
