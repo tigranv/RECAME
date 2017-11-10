@@ -89,6 +89,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Man.cs" />
     <Compile Include="Pages\Organizations\Organization.xaml.cs">
       <DependentUpon>Organization.xaml</DependentUpon>
     </Compile>

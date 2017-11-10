@@ -66,7 +66,7 @@
                                 Content="{StaticResource ImagePDF5}"
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
 
-                            
+
 
 
                         </StackPanel>
@@ -78,9 +78,6 @@
                     <Grid  Name="Filter" Grid.Column="1" Grid.Row="1" Margin="10">
 
                         <StackPanel Orientation="Vertical">
-                            <!--<ComboBox  ItemsSource="{Binding Themes}" SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" DisplayMemberPath="DisplayName" VerticalAlignment="Center" Margin="0,0,0,4" />-->
-
-
                             <GroupBox Grid.Row="1" Margin="0,10,0,0"  Header="Filter Residents" FontSize="18">
                                 <Grid Margin="5">
                                     <Grid.RowDefinitions>
@@ -103,7 +100,9 @@
                                     <src:MultiComboBox Margin="0,5,0,0" Name="selectedItems1" Grid.Row="3" SelectionMode="Multiple" 
                                  VerticalAlignment="Center"
                                  ItemsSource="{Binding Animals}"
-                                 SelectedItems="{Binding SelectedAnimals}">
+                                 SelectedItems="{Binding SelectedAnimals}"
+                                                       DisplayMemberPath="Name"
+                                                         >
                                         <src:MultiComboBox.DisplaySeparator>
                                             <Ellipse Margin="3,0" Height="4" Width="4" Fill="Black"/>
                                         </src:MultiComboBox.DisplaySeparator>
@@ -113,8 +112,10 @@
                                  VerticalAlignment="Center"
                                  IsCreateNewEnabled="True"
                                  DisplaySeparator=", "
+                                          
                                  ItemsSource="{Binding Animals}"
-                                 SelectedItems="{Binding SelectedAnimals}">
+                                 SelectedItems="{Binding SelectedAnimals}"
+                                 DisplayMemberPath="Name">
 
                                     </src:MultiComboBox>
                                 </Grid>

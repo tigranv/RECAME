@@ -120,16 +120,16 @@ namespace BisolUITest.v1.Pages.Residents
 
         #endregion
 
-        private ObservableCollection<string> _animals = new ObservableCollection<string>
-        { "Cat", "Dog", "Bear", "Lion", "Mouse", "Horse", "Rat", "Elephant", "Kangaroo", "Lizard", "Snake", "Frog", "Fish", "Butterfly", "Human", "Cow", "Bumble Bee" };
+        private ObservableCollection<Man> _animals = new ObservableCollection<Man>
+        { new Man() {Id = 1, Name = "name1" }, new Man() {Id = 2, Name = "name2" } };
 
-        public ObservableCollection<string> Animals
+        public ObservableCollection<Man> Animals
         {
             get { return _animals; }
         }
 
-        private string _selectedAnimal = "Cat";
-        public string SelectedAnimal
+        private Man _selectedAnimal;
+        public Man SelectedAnimal
         {
             get { return _selectedAnimal; }
             set
@@ -139,14 +139,14 @@ namespace BisolUITest.v1.Pages.Residents
             }
         }
 
-        private ObservableCollection<string> _selectedAnimals;
-        public ObservableCollection<string> SelectedAnimals
+        private ObservableCollection<Man> _selectedAnimals;
+        public ObservableCollection<Man> SelectedAnimals
         {
             get
             {
                 if (_selectedAnimals == null)
                 {
-                    _selectedAnimals = new ObservableCollection<string> { "Dog", "Lion", "Lizard" };
+                    _selectedAnimals = new ObservableCollection<Man>();
                     SelectedAnimalsText = WriteSelectedAnimalsString(_selectedAnimals);
                     _selectedAnimals.CollectionChanged +=
                         (s, e) =>
@@ -175,17 +175,17 @@ namespace BisolUITest.v1.Pages.Residents
         string _selectedAnimalsText;
 
 
-        private static string WriteSelectedAnimalsString(IList<string> list)
+        private static string WriteSelectedAnimalsString(IList<Man> list)
         {
             if (list.Count == 0)
                 return String.Empty;
 
-            StringBuilder builder = new StringBuilder(list[0]);
+            StringBuilder builder = new StringBuilder(list[0].Name);
 
             for (int i = 1; i < list.Count; i++)
             {
                 builder.Append(", ");
-                builder.Append(list[i]);
+                builder.Append(list[i].Name);
             }
 
             return builder.ToString();
