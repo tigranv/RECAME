@@ -77,7 +77,7 @@ namespace BisolUITest.v1.Pages.Residents
             {
                 var resident = new fnRESIDENTCONTRACT() { ID = i, BRANCH = i, CITY = 1111, FAMILY = "fffff", FATHERNAME = "gggg", STREET = "yyyy", HOUSE = "tttt", NAME = "nnnn" };
                 list.Add(resident);
-                //Thread.Sleep(10);
+                Thread.Sleep(5);
             }
             return list;
         }
@@ -101,10 +101,10 @@ namespace BisolUITest.v1.Pages.Residents
 
         private async void ConvertToXlsExecute(object obj)
         {
-            Converters.CreateExcelDoc(GetResidentTestList());
-            //ProgresBarFlag = true;
-            //ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(await LoadReport());
-            //ProgresBarFlag = false;
+            //XlsConverters.CreateExcelDoc(GetResidentTestList());
+            ProgresBarFlag = true;
+            ResidentsList = new ObservableCollection<fnRESIDENTCONTRACT>(await LoadReport());
+            ProgresBarFlag = false;
         }
 
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BisolUITest.v1.Helpers
 {
-    static class Converters
+    static class XlsConverters
     {
         public static void CreateExcelDoc(List<fnRESIDENTCONTRACT> marketType)
         {

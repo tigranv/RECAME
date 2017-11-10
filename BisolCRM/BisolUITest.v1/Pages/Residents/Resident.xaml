@@ -31,6 +31,7 @@
 
                             <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImageAdd}"
+                                
                                 Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
                             <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource Imageedit}"
@@ -64,7 +65,7 @@
 
                             <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                 Content="{StaticResource ImagePDF5}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True" IsEnabled="{Binding ProgresBarFlag, Converter={StaticResource InverseBooleanConverter}}"/>
 
 
 
