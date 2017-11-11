@@ -10,73 +10,108 @@
              mc:Ignorable="d" >
 
     <Border  BorderBrush="Black" BorderThickness="2, 2, 2, 2" >
-
         <DockPanel>
             <Grid>
-
-
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition  />
                         <ColumnDefinition Width="250"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition  Height="60"/>
+                        <RowDefinition  Height="40"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    
+                        <Border Grid.Row="0" Grid.Column = "0"  BorderBrush="Black" BorderThickness="0, 0, 2, 2" >
+                        <DockPanel LastChildFill="True">
+                            <StackPanel  Orientation="Vertical" Width="50" HorizontalAlignment="Left" Margin="0, 0, 30, 0">
+                                <Button  BorderThickness="0" Height="40" Width="40" Padding="0, 0" VerticalContentAlignment="Center" VerticalAlignment="Center" 
+                                Content="{StaticResource ImageResicon}" IsEnabled="False"/>
+                            </StackPanel>
 
-                    <Border Grid.Row="0" Grid.Column = "0" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="0, 0, 0, 2">
-                        <StackPanel x:Name="Panel" MinWidth="150"  Orientation="Horizontal">
-                            <TextBlock Text="Resident Contracts" Style="{StaticResource Heading2}" VerticalAlignment="Center" Margin="10" />
+                            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Load Data" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
+                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
+                                Content="{StaticResource ImageLoadData}"
+                                Command="{Binding LoadDataCommand}" IsDefault="True"
+                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
 
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                <TextBlock Text="Refresh" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
+                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
+                                Content="{StaticResource ImageRefresh}"
+                                Command="{Binding LoadDataCommand}" IsDefault="True"
+                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+
+                                <TextBlock Text="Add New" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
+                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
                                 Content="{StaticResource ImageAdd}"
-                                
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Command="{Binding AddNewCommand}" IsDefault="True"
+                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+
+                                <TextBlock Text="Modify" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
+                                <Button BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
                                 Content="{StaticResource Imageedit}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Command="{Binding EditCommand}" IsDefault="True"
+                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+
+                                <TextBlock Text="Remove" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
+                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
                                 Content="{StaticResource Imageremove}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                                Command="{Binding DeleteCommand}" IsDefault="True"
+                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
 
+                            </StackPanel>
 
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                Content="{StaticResource ImageXls2}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                Content="{StaticResource ImagePDF1}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                Content="{StaticResource ImageXlsx}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                Content="{StaticResource Imagesearch}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                Content="{StaticResource ImagedDownload}" IsEnabled="{Binding ProgresBarFlag}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
-
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
+                                <TextBlock Text="XLS" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="20, 0, 10, 0" />
+                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
                                 Content="{StaticResource ImageXls}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"/>
+                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"
+                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
 
-                            <Button BorderThickness="0" Margin="2" Height="50" Width="50" Padding="0, 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                <TextBlock Text="PDF" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="20, 0, 10, 0" />
+                            <Button  BorderThickness="0"  Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" Margin="0, 0, 20, 0"
                                 Content="{StaticResource ImagePDF5}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True" IsEnabled="{Binding ProgresBarFlag, Converter={StaticResource InverseBooleanConverter}}"/>
+                                Command="{Binding ConvertToPDFCommand}" IsDefault="True" 
+                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                            </StackPanel>
+                            
+                        </DockPanel>
+                        
+                    </Border>
 
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0, 0, 1, 1" >
+                        <Grid>
+                            <mui:ModernProgressRing IsActive="{Binding IsDataLoading}" Width="80" Height="80" Style="{Binding SelectedItem.Tag, ElementName=CmbRingStyle}" />
 
+                            <ListView  ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="8" ItemsSource="{Binding ResidentsList}">
+                                <ListView.Resources>
+                                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                    </Style>
+                                </ListView.Resources>
+                                <ListView.View >
+                                    <GridView >
+                                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding CityName}" Header="CITY" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding BranchName}" Header="BRANCH" Width="100"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="130"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="120"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="120"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding DUTYEND}" Header="DUTYEND" Width="100"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
 
-
-                        </StackPanel>
+                        </Grid>
 
                     </Border>
 
-
-
-                    <Grid  Name="Filter" Grid.Column="1" Grid.Row="1" Margin="10">
+                    <Grid  Name="Filter" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="10">
 
                         <StackPanel Orientation="Vertical">
                             <GroupBox Grid.Row="1" Margin="0,10,0,0"  Header="Filter Residents" FontSize="18">
@@ -89,36 +124,19 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Text="Selected Items Viewed in Text Box:"  FontSize="12"/>
-                                    <TextBox Margin="0,5,0,0" Grid.Row="1"
-                         Text="{Binding Path=SelectedAnimalsText, Mode=OneWay}" />
+                                    <TextBlock Text="Search By Id"  FontSize="12"/>
+                                    <TextBox Margin="0,5,0,0" Grid.Row="1" FontSize="12"/>
 
-                                    <TextBlock Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" 
-                           TextWrapping="Wrap"
-                           Text="Two Multi Select Combo Boxs, which stay in sync because they are bound to the same ObservableCollection: " FontSize="12" />
+                                    <TextBlock Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" Text="By Branch" FontSize="12" />
 
+                                    <ComboBox ItemsSource="{Binding Branches}" SelectedItem="{Binding SelectedBranch}" Margin="0,5,0,0"  Grid.Row="3" 
+                                               DisplayMemberPath="NAME"
+                                               VerticalAlignment="Center"/>
+                                    <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" Grid.Row="4" 
+                                Content="{StaticResource ImageLoadData}"
+                                Command="{Binding OnOkCommand}" IsDefault="True"
+                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
 
-                                    <src:MultiComboBox Margin="0,5,0,0" Name="selectedItems1" Grid.Row="3" SelectionMode="Multiple" 
-                                 VerticalAlignment="Center"
-                                 ItemsSource="{Binding Animals}"
-                                 SelectedItems="{Binding SelectedAnimals}"
-                                                       DisplayMemberPath="Name"
-                                                         >
-                                        <src:MultiComboBox.DisplaySeparator>
-                                            <Ellipse Margin="3,0" Height="4" Width="4" Fill="Black"/>
-                                        </src:MultiComboBox.DisplaySeparator>
-                                    </src:MultiComboBox>
-
-                                    <src:MultiComboBox Margin="0,10,0,0" Grid.Row="4" SelectionMode="Multiple" 
-                                 VerticalAlignment="Center"
-                                 IsCreateNewEnabled="True"
-                                 DisplaySeparator=", "
-                                          
-                                 ItemsSource="{Binding Animals}"
-                                 SelectedItems="{Binding SelectedAnimals}"
-                                 DisplayMemberPath="Name">
-
-                                    </src:MultiComboBox>
                                 </Grid>
                             </GroupBox>
 
@@ -126,36 +144,6 @@
 
 
                     </Grid>
-
-                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0, 0, 1, 1" >
-                        <Grid>
-                            <mui:ModernProgressRing IsActive="{Binding ProgresBarFlag}" Width="80" Height="80" Style="{Binding SelectedItem.Tag, ElementName=CmbRingStyle}" />
-
-                            <ListView  ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="8" ItemsSource="{Binding ResidentsList}">
-                                <ListView.Resources>
-                                    <Style TargetType="{x:Type GridViewColumnHeader}">
-                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                    </Style>
-                                </ListView.Resources>
-                                <ListView.View >
-                                    <GridView >
-                                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding CITY}" Header="CITY" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding BRANCH}" Header="BRANCH" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="100"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-
-                        </Grid>
-
-                    </Border>
 
                 </Grid>
 

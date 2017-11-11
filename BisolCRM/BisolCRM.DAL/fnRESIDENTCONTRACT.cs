@@ -23,5 +23,8 @@ namespace BisolCRM.DAL
         public string FAMILY { get; set; }
         public string NAME { get; set; }
         public string FATHERNAME { get; set; }
+        public Nullable<decimal> DUTYEND { get; set; }
+        public string BranchName { get; set; }
+        public string CityName { get; set; }
     }
 }

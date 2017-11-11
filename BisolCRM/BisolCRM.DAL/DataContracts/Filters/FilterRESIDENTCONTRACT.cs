@@ -14,6 +14,8 @@ namespace BisolCRM.DAL.DataContracts.Filters
         [DataMember]
         public int? Source { get; set; }
 
+        public int? BranchId { get; set; }
+
         public override IQueryable<ModelBase> FilterObjects(IQueryable<ModelBase> query)
         {
             return FilterObjects(query.Cast<RESIDENTCONTRACT>());
@@ -29,8 +31,8 @@ namespace BisolCRM.DAL.DataContracts.Filters
 
         public IQueryable<fnRESIDENTCONTRACT> FilterObjects(IQueryable<fnRESIDENTCONTRACT> query)
         {
-            //if (Type.HasValue)
-            //    query = query.Where(x => x.Type == Type);
+            if (BranchId.HasValue)
+                query = query.Where(x => x.BRANCH == BranchId);
             return ApplyMaxRows(query);
         }
     }

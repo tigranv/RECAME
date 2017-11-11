@@ -7,19 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace BisolUITest.v1.Helpers
 {
     static class XlsConverters
     {
-        public static void CreateExcelDoc(List<fnRESIDENTCONTRACT> marketType)
+        public static void CreateExcelDoc(List<fnRESIDENTCONTRACT> marketType, string path)
         {
-            //show dialog
-            var dlg = new System.Windows.Forms.FolderBrowserDialog();
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog();
-            if (result != System.Windows.Forms.DialogResult.OK) return;
-
-            var path = dlg.SelectedPath;
             var fileName = path + @"\Export.xls";
             using (SpreadsheetDocument document = SpreadsheetDocument.Create(fileName, SpreadsheetDocumentType.Workbook))
             {

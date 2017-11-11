@@ -2153,6 +2153,9 @@ warning 6002: The table/view 'GlobalDB_022014_current.dbo.BS_USER_ACTION_LOG' do
                 <Property Name="FAMILY" Type="nvarchar" MaxLength="255" />
                 <Property Name="NAME" Type="nvarchar" MaxLength="255" />
                 <Property Name="FATHERNAME" Type="nvarchar" MaxLength="255" />
+                <Property Name="DUTYEND" Type="numeric" Precision="15" Scale="2" />
+                <Property Name="BranchName" Type="nvarchar" MaxLength="255" />
+                <Property Name="CityName" Type="nvarchar" MaxLength="255" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -3439,16 +3442,19 @@ warning 6002: The table/view 'GlobalDB_022014_current.dbo.BS_USER_ACTION_LOG' do
         </ComplexType>
         <ComplexType Name="fnRESIDENTCONTRACT">
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="CITY" Type="Int32" />
-          <Property Name="HOUSE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="STREET" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TOC1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TOC2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="BRANCH" Type="Int32" />
-          <Property Name="FAMILY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="FATHERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </ComplexType>
+          <Property Name="CITY" Type="Int32" Nullable="true" />
+          <Property Name="HOUSE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="STREET" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="TOC1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="TOC2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="BRANCH" Type="Int32" Nullable="true" />
+          <Property Name="FAMILY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="FATHERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Type="Decimal" Name="DUTYEND" Nullable="true" Precision="15" Scale="2" />
+          <Property Type="String" Name="BranchName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="255" />
+          </ComplexType>
         <ComplexType Name="fn_Split_Result">
           <Property Name="PN" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -8649,7 +8655,10 @@ warning 6002: The table/view 'GlobalDB_022014_current.dbo.BS_USER_ACTION_LOG' do
                 <ScalarProperty Name="FAMILY" ColumnName="FAMILY" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="FATHERNAME" ColumnName="FATHERNAME" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="DUTYEND" ColumnName="DUTYEND" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionName="GlobalDB_022014_currentModel.Store.fn_Split" FunctionImportName="fn_Split">

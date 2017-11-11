@@ -158,18 +158,18 @@
     <Resource Include="Resources\PDF5.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\xls1.png" />
+    <Resource Include="Resources\LoadData.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\xls2.png" />
-    <Resource Include="Resources\edit.png" />
-    <Resource Include="Resources\download.png" />
-    <Resource Include="Resources\pdf1.png" />
-    <Resource Include="Resources\search.png" />
-    <Resource Include="Resources\add.png" />
+    <Resource Include="Resources\Add.png" />
+    <Resource Include="Resources\Edit.png" />
     <Resource Include="Resources\remove.png" />
-    <Content Include="Resources\if_icon-92-inbox-download_315490.png" />
-    <Resource Include="Resources\xlsx1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Residentsicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
