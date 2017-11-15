@@ -6,11 +6,9 @@
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:modernui="clr-namespace:FirstFloor.ModernUI;assembly=FirstFloor.ModernUI"
              xmlns:navigation="clr-namespace:FirstFloor.ModernUI.Windows.Navigation;assembly=FirstFloor.ModernUI"
-             xmlns:converters="clr-namespace:BisolUITest.v1.Converters"
-
-
-             
+             xmlns:converters="clr-namespace:BisolUITest.v1.Converters"       
              StartupUri="MainWindow.xaml">
+    
     <Application.Resources>
 
         <ResourceDictionary>
@@ -21,7 +19,7 @@
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/Converters.xaml" />
                 <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/TextBlock.xaml" />
             </ResourceDictionary.MergedDictionaries>
-   
+
             <Image x:Key="ImageXls" Source ="Resources/execicon.png"/>
             <Image x:Key="ImageAdd" Source ="Resources/Add.png"/>
             <Image x:Key="Imageedit" Source ="Resources/Edit.png"/>
@@ -31,7 +29,6 @@
             <Image x:Key="ImageRefresh" Source ="Resources/Refresh.png"/>
             <Image x:Key="ImageResicon" Source ="Resources/Residentsicon.png"/>
 
-            <Path x:Key="IconTriangle" x:Shared="False" Stretch="Uniform" Data="F1 M 20,17L 43.25,17L 56,29.75L 56,59L 20,59L 20,17 Z M 24,21L 24,55L 52,55L 52,34L 39,34L 39,21L 24,21 Z M 43,22.25L 43,30L 50.75,30L 43,22.25 Z M 30,48L 34,48L 34,39.5L 37,42.5L 37,37.75L 32,32.75L 27,38.25L 27,42.5L 30,39.5L 30,48 Z M 38,49L 38,53L 26,53L 26,49L 38,49 Z  " Fill="Black" Stroke="Black"/>
             <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
 
             <Style TargetType="controls:ModernMenu">
@@ -152,8 +149,8 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource WindowBorder}" />
                 <Setter Property="Width" Value="800" />
                 <Setter Property="Height" Value="640" />
-                <Setter Property="MinWidth" Value="320" />
-                <Setter Property="MinHeight" Value="320" />
+                <Setter Property="MinWidth" Value="600" />
+                <Setter Property="MinHeight" Value="400" />
                 <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
                 <Setter Property="UseLayoutRounding" Value="True" />
                 <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
@@ -272,19 +269,19 @@
 
                                             <Grid Grid.Row="1">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="42" />
+                                                    <ColumnDefinition Width="15" />
                                                     <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <!-- back button -->
-                                                
-                                        <controls:ModernButton Margin="8,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+
+                                                <!--<controls:ModernButton Margin="8,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
                                                                EllipseDiameter="24" IconWidth="12" IconHeight="12"
                                                                IconData="F1 M 33,22L 33,26L 19.75,26L 27,33L 20.5,33L 11,24L 20.5,15L 27,15L 19.75,22L 33,22 Z"
                                                                Command="NavigationCommands.BrowseBack"
                                                                CommandTarget="{Binding ElementName=ContentFrame}" 
                                                                ToolTip="{x:Static modernui:Resources.Back}"
-                                                               WindowChrome.IsHitTestVisibleInChrome="True" /> 
+                                                               WindowChrome.IsHitTestVisibleInChrome="True" />-->
 
                                                 <!-- main menu -->
                                                 <controls:ModernMenu Grid.Column="1"
@@ -293,7 +290,7 @@
                                             </Grid>
 
                                             <!-- content frame -->
-                                            <controls:ModernFrame x:Name="ContentFrame" Grid.Row="3" Grid.RowSpan="2" Margin="42,8,16,16" Source="{Binding ContentSource, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" ContentLoader="{TemplateBinding ContentLoader}"/>
+                                            <controls:ModernFrame x:Name="ContentFrame" Grid.Row="3" Grid.RowSpan="2" Margin="15,8,15,15" Source="{Binding ContentSource, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" ContentLoader="{TemplateBinding ContentLoader}"/>
 
                                             <!-- resize grip -->
                                             <Grid Grid.Row="2" x:Name="ResizeGrip" Background="Transparent" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Bottom" WindowChrome.ResizeGripDirection="BottomRight">
@@ -341,7 +338,6 @@
             </Style>
 
         </ResourceDictionary>
-        
     </Application.Resources>
 </Application>
 

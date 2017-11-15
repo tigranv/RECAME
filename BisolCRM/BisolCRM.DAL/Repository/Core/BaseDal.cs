@@ -324,5 +324,18 @@ namespace BisolCRM.DAL.Repository.Core
                 _tAWDBREGIONDal = value;
             }
         }
+
+        private ITAWDBCITYDal _tAWDBCITYDal;
+        public ITAWDBCITYDal TAWDBCITYDal
+        {
+            get
+            {
+                return _tAWDBCITYDal ?? (_tAWDBCITYDal = new TAWDBCITYDal(this));
+            }
+            set
+            {
+                _tAWDBCITYDal = value;
+            }
+        }
     }
 }

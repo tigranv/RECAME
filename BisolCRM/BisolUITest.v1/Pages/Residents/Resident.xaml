@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BisolUITest.v1"
-             xmlns:src="clr-namespace:CustomControls;assembly=MultiComboBox"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+
 
              mc:Ignorable="d" >
 
@@ -15,14 +15,14 @@
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition  />
-                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition  Height="40"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     
-                        <Border Grid.Row="0" Grid.Column = "0"  BorderBrush="Black" BorderThickness="0, 0, 2, 2" >
+                        <Border Grid.Row="0" Grid.Column = "0"  BorderBrush="Gray" BorderThickness="0, 0, 2, 2" >
                         <DockPanel LastChildFill="True">
                             <StackPanel  Orientation="Vertical" Width="50" HorizontalAlignment="Left" Margin="0, 0, 30, 0">
                                 <Button  BorderThickness="0" Height="40" Width="40" Padding="0, 0" VerticalContentAlignment="Center" VerticalAlignment="Center" 
@@ -30,114 +30,208 @@
                             </StackPanel>
 
                             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
-                                <TextBlock Text="Load Data" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
-                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
-                                Content="{StaticResource ImageLoadData}"
-                                Command="{Binding LoadDataCommand}" IsDefault="True"
-                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Margin" Value="5,0,20,0" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="FontSize" Value="13" />
+                                        <Setter Property="IsEnabled" Value="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Height" Value="35"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Button Command="{Binding LoadDataCommand}" Padding="0,0" >
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Load Data" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="5, 0, 3, 0" />
+                                            <Image HorizontalAlignment="Left" Margin="0, 0, 10, 0" Source ="/Resources/LoadData.png"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
 
-                                <TextBlock Text="Refresh" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
-                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
-                                Content="{StaticResource ImageRefresh}"
-                                Command="{Binding LoadDataCommand}" IsDefault="True"
-                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <Button Command="{Binding LoadDataCommand}" Padding="0,0" >
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Refresh" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="5, 0, 3, 0" />
+                                            <Image HorizontalAlignment="Left" Margin="3, 5, 10, 5" Source ="/Resources/Refresh.png"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
 
-                                <TextBlock Text="Add New" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
-                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
-                                Content="{StaticResource ImageAdd}"
-                                Command="{Binding AddNewCommand}" IsDefault="True"
-                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <Button Command="{Binding AddNewCommand}" Padding="0,0" >
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Add New" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="5, 0, 3, 0" />
+                                            <Image HorizontalAlignment="Left" Margin="5, 0, 10, 0" Source ="/Resources/Add.png"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
 
-                                <TextBlock Text="Modify" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
-                                <Button BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
-                                Content="{StaticResource Imageedit}"
-                                Command="{Binding EditCommand}" IsDefault="True"
-                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <Button Command="{Binding EditCommand}" Padding="0,0" >
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Modify" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="5, 0, 3, 0" />
+                                            <Image HorizontalAlignment="Left" Margin="5, 2, 10, 2" Source ="/Resources/Edit.png"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
 
-                                <TextBlock Text="Remove" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="25, 0, 10, 0" />
-                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
-                                Content="{StaticResource Imageremove}"
-                                Command="{Binding DeleteCommand}" IsDefault="True"
-                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <Button Command="{Binding DeleteCommand}" Padding="0,0" >
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Remove" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="5, 0, 3, 0" />
+                                            <Image HorizontalAlignment="Left" Margin="5, 2, 10, 2" Source ="/Resources/remove.png"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
 
                             </StackPanel>
 
                             <StackPanel  Orientation="Horizontal" HorizontalAlignment="Right">
-                                <TextBlock Text="XLS" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="20, 0, 10, 0" />
-                                <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" 
-                                Content="{StaticResource ImageXls}"
-                                Command="{Binding ConvertToXlsCommand}" IsDefault="True"
-                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <StackPanel.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Margin" Value="5,0,20,0" />
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="FontSize" Value="13" />
+                                        <Setter Property="IsEnabled" Value="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Height" Value="35"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                                
+                                <Button Command="{Binding ConvertToXlsCommand}" Padding="0,0" >
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="XLS" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="5, 0, 3, 0" />
+                                            <Image HorizontalAlignment="Left" Margin="5, 2, 10, 2" Source ="/Resources/execicon.png"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
 
-                                <TextBlock Text="PDF" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="20, 0, 10, 0" />
-                            <Button  BorderThickness="0"  Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" Margin="0, 0, 20, 0"
-                                Content="{StaticResource ImagePDF5}"
-                                Command="{Binding ConvertToPDFCommand}" IsDefault="True" 
-                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <Button Command="{Binding ConvertToPDFCommand}" Padding="0,0" >
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="PDF" FontWeight="Medium" FontSize="13" VerticalAlignment="Center" Margin="5, 0, 3, 0" />
+                                            <Image HorizontalAlignment="Left" Margin="5, 2, 10, 2" Source ="/Resources/PDF5.png"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+
                             </StackPanel>
                             
                         </DockPanel>
                         
                     </Border>
 
-                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="0, 0, 1, 1" >
+                    <Border Grid.Row="1" Grid.Column="0" BorderBrush="Gray" BorderThickness="0, 0, 1, 1" >
                         <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
                             <mui:ModernProgressRing IsActive="{Binding IsDataLoading}" Width="80" Height="80" Style="{Binding SelectedItem.Tag, ElementName=CmbRingStyle}" />
 
-                            <ListView  ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="8" ItemsSource="{Binding ResidentsList}">
-                                <ListView.Resources>
-                                    <Style TargetType="{x:Type GridViewColumnHeader}">
-                                        <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                    </Style>
-                                </ListView.Resources>
-                                <ListView.View >
-                                    <GridView >
-                                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding CityName}" Header="CITY" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding HOUSE}" Header="HOUSE" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding STREET}" Header="STREET" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding TOC1}" Header="TOC1" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding TOC2}" Header="TOC2" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding BranchName}" Header="BRANCH" Width="100"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding FAMILY}" Header="FAMILY" Width="130"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding NAME}" Header="NAME" Width="120"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding FATHERNAME}" Header="FATHERNAME" Width="120"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding DUTYEND}" Header="DUTYEND" Width="100"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
+                            <DataGrid Grid.Row="0" ItemsSource="{Binding ResidentsList}" AutoGenerateColumns="False" BorderThickness="1"
+                                      Background="Transparent" Foreground="Black">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                                    <DataGridTextColumn Header="City" Binding="{Binding CityName}" />
+                                    <DataGridTextColumn Header="Street" Binding="{Binding STREET}" />
+                                    <DataGridTextColumn Header="TOC1" Binding="{Binding TOC1}" />
+                                    <DataGridTextColumn Header="TOC2" Binding="{Binding TOC2}" />
+                                    <DataGridTextColumn Header="Branch" Binding="{Binding BranchName}" />
+                                    <DataGridTextColumn Header="First Name" Binding="{Binding FAMILY}" />
+                                    <DataGridTextColumn Header="Last Name" Binding="{Binding NAME}" />
+                                    <DataGridTextColumn Header="Fathername" Binding="{Binding FATHERNAME}" />
+                                    <DataGridTextColumn Header="DUTYEND" Binding="{Binding DUTYEND}" />
 
+                                    <!--<DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Image}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>-->
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Height="23" HorizontalAlignment="Left" Margin="0, 0, 5, 0"  Name="btnFirst" VerticalAlignment="Bottom" Width="60" 
+                                        Content="&lt;&lt;" Opacity="0.75"/>
+                                <Button Height="23"  VerticalAlignment="Bottom" Margin="0, 0, 5, 0" Name="btnPrev" Width="50"  
+                                        Opacity="0.75" Content="&lt;"/>
+                                <Label x:Name="lblpageInformation" Margin="0, 0, 5, 0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Width="100" 
+                                       VerticalContentAlignment="Center" VerticalAlignment="Bottom"/>
+                                <Button Height="23" HorizontalAlignment="Right" Margin="0, 0, 5, 0" Name="btnNext" VerticalAlignment="Bottom" Width="50" 
+                                        Content="&gt;"  Opacity="0.75"/>
+                                <Button Height="23" HorizontalAlignment="Right" Margin="0, 0, 5, 0"  VerticalAlignment="Bottom" Width="60" Name="btnLast" 
+                                        Opacity="0.75" Content="&gt;&gt;"/>
+                                <ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Left" Margin="0, 0, 5, 0" VerticalAlignment="Bottom" Width="80"  SelectedIndex="0" 
+                                          Opacity="0.75"/>
+                            </StackPanel>
                         </Grid>
-
                     </Border>
 
                     <Grid  Name="Filter" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="10">
 
-                        <StackPanel Orientation="Vertical">
-                            <GroupBox Grid.Row="1" Margin="0,10,0,0"  Header="Filter Residents" FontSize="18">
-                                <Grid Margin="5">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <GroupBox Grid.Row="1" Margin="0,0,0,0"  Header="Filter" FontSize="16" MinHeight="400">
+                                <StackPanel>
+                                    <TextBlock Margin="4,10,0,0"  Text="Id"  FontSize="12"/>
+                                    <TextBox  Text="{Binding Path = Filter.Id, TargetNullValue='', Mode=TwoWay}" Margin="4,2,0,0" Grid.Row="1" FontSize="12"/>
 
-                                    <TextBlock Text="Search By Id"  FontSize="12"/>
-                                    <TextBox Margin="0,5,0,0" Grid.Row="1" FontSize="12"/>
+                                    <TextBlock Margin="4,25,0,0" Grid.Row="2" Grid.Column="0" Text="Region" FontSize="12" />
+                                    <ComboBox ItemsSource="{Binding Regions}" SelectedItem="{Binding SelectedRegion}" Margin="4,2,0,0"  Grid.Row="3" 
+                                              DisplayMemberPath="NAME" FontSize="14" VerticalAlignment="Center"
+                                              IsEditable="True" IsReadOnly="True" Text="Select Region"/>
+                                    
+                                    <TextBlock Margin="4,25,0,0" Grid.Row="2" Grid.Column="0" Text="Branch" FontSize="12" />
+                                    <ComboBox ItemsSource="{Binding Branches}" SelectedItem="{Binding SelectedBranch}" Margin="4,2,0,0"  Grid.Row="3" 
+                                              DisplayMemberPath="NAME" FontSize="14" VerticalAlignment="Center"
+                                              IsEditable="True" IsReadOnly="True" Text="Select branch"/>
 
-                                    <TextBlock Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" Text="By Branch" FontSize="12" />
+                                    <TextBlock Margin="4,25,0,0" Grid.Row="2" Grid.Column="0" Text="City" FontSize="12" />
+                                    <ComboBox ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}" Margin="4,2,0,0"  Grid.Row="3" 
+                                              DisplayMemberPath="NAME" FontSize="14" VerticalAlignment="Center"
+                                              IsEditable="True" IsReadOnly="True" Text="Select city"/>
 
-                                    <ComboBox ItemsSource="{Binding Branches}" SelectedItem="{Binding SelectedBranch}" Margin="0,5,0,0"  Grid.Row="3" 
-                                               DisplayMemberPath="NAME"
-                                               VerticalAlignment="Center"/>
-                                    <Button  BorderThickness="0" Height="35" Width="35" Padding="0, 0"  VerticalAlignment="Center" Grid.Row="4" 
-                                Content="{StaticResource ImageLoadData}"
-                                Command="{Binding OnOkCommand}" IsDefault="True"
-                                IsEnabled="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                    <StackPanel  Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0, 10, 0, 0">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Margin" Value="5,15,20,15" />
+                                                <Setter Property="BorderThickness" Value="1" />
+                                                <Setter Property="BorderBrush" Value="LightGray" />
+                                                <Setter Property="FontSize" Value="13" />
+                                                <Setter Property="IsEnabled" Value="{Binding IsDataLoading, Converter={StaticResource InverseBooleanConverter}}"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="Height" Value="30"/>
+                                            </Style>
+                                        </StackPanel.Resources>
 
-                                </Grid>
+                                        <Button Command="{Binding OnOkCommand}" Padding="0,0" >
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image HorizontalAlignment="Left" Margin="5, 2, 5, 1" Source ="/Resources/filterdata.png"/>
+                                                    <TextBlock FontWeight="Medium" FontSize="13"  Margin="0, 0, 5, 0" VerticalAlignment="Center" >Filter Data</TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+                                        
+                                        <Button Command="{Binding OnClearFilterCommand}" Padding="0,0" >
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image HorizontalAlignment="Left" Margin="5, 1, 5, 1" Source ="/Resources/clearfilter.png"/>
+                                                    <TextBlock VerticalAlignment="Center" FontWeight="Medium" Margin="0, 0, 5, 0">Clear Filter</TextBlock>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
+
+                                    </StackPanel>
+                                         
+                                </StackPanel>
+                               
                             </GroupBox>
 
                         </StackPanel>
