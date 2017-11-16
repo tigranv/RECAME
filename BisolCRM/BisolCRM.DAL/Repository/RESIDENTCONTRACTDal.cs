@@ -26,5 +26,11 @@ namespace BisolCRM.DAL.Repository
             var query = db.fn_RESIDENTCONTRACT().AsQueryable();
             return filter.FilterObjects(query).ToList();
         }
+
+        public int GetRESIDENTCONTRACTCount(FilterRESIDENTCONTRACT filter)
+        {
+            var query = db.fn_RESIDENTCONTRACT().AsQueryable();
+            return filter.FilterObjectsNoMax(query).Count();
+        }
     }
 }

@@ -145,7 +145,7 @@
                                     <DataGridTextColumn Header="First Name" Binding="{Binding FAMILY}" />
                                     <DataGridTextColumn Header="Last Name" Binding="{Binding NAME}" />
                                     <DataGridTextColumn Header="Fathername" Binding="{Binding FATHERNAME}" />
-                                    <DataGridTextColumn Header="DUTYEND" Binding="{Binding DUTYEND}" />
+                                    <DataGridTextColumn Header="Total DUTYEND" Binding="{Binding TotalDUTYEND}" />
 
                                     <!--<DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
                                         <DataGridTemplateColumn.CellTemplate>
@@ -158,17 +158,20 @@
                             </DataGrid>
                             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Height="23" HorizontalAlignment="Left" Margin="0, 0, 5, 0"  Name="btnFirst" VerticalAlignment="Bottom" Width="60" 
-                                        Content="&lt;&lt;" Opacity="0.75"/>
+                                        Command="{Binding BtnFirstCommand}" Content="&lt;&lt;" Opacity="0.75"/>
                                 <Button Height="23"  VerticalAlignment="Bottom" Margin="0, 0, 5, 0" Name="btnPrev" Width="50"  
-                                        Opacity="0.75" Content="&lt;"/>
-                                <Label x:Name="lblpageInformation" Margin="0, 0, 5, 0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Width="100" 
-                                       VerticalContentAlignment="Center" VerticalAlignment="Bottom"/>
+                                        Command="{Binding BtnPrevCommand}" Opacity="0.75" Content="&lt;"/>
+                                <Label  Margin="0, 0, 5, 0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="20" Width="50" 
+                                        Content="{Binding PageIndex}" VerticalContentAlignment="Center" VerticalAlignment="Bottom"/>
+                                <Label  Margin="0, 0, 5, 0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="20" Width="20" 
+                                        Content="of" VerticalContentAlignment="Center" VerticalAlignment="Bottom"/>
+                                <Label  Margin="0, 0, 5, 0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="20" Width="50" 
+                                        Content="{Binding NumberOfPagies}" VerticalContentAlignment="Center" VerticalAlignment="Bottom"/>
                                 <Button Height="23" HorizontalAlignment="Right" Margin="0, 0, 5, 0" Name="btnNext" VerticalAlignment="Bottom" Width="50" 
-                                        Content="&gt;"  Opacity="0.75"/>
+                                        Command="{Binding BtnNextCommand}" Content="&gt;"  Opacity="0.75"/>
                                 <Button Height="23" HorizontalAlignment="Right" Margin="0, 0, 5, 0"  VerticalAlignment="Bottom" Width="60" Name="btnLast" 
-                                        Opacity="0.75" Content="&gt;&gt;"/>
-                                <ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Left" Margin="0, 0, 5, 0" VerticalAlignment="Bottom" Width="80"  SelectedIndex="0" 
-                                          Opacity="0.75"/>
+                                        Command="{Binding BtnLastCommand}" Opacity="0.75" Content="&gt;&gt;"/>
+                                
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -180,6 +183,9 @@
                                 <StackPanel>
                                     <TextBlock Margin="4,10,0,0"  Text="Id"  FontSize="12"/>
                                     <TextBox  Text="{Binding Path = Filter.Id, TargetNullValue='', Mode=TwoWay}" Margin="4,2,0,0" Grid.Row="1" FontSize="12"/>
+                                    
+                                    <TextBlock Margin="4,10,0,0"  Text="Per Page"  FontSize="12"/>
+                                    <TextBox  Text="{Binding Path = NumberOfRows, TargetNullValue='', Mode=TwoWay}" Margin="4,2,0,0" Grid.Row="1" FontSize="12"/>
 
                                     <TextBlock Margin="4,25,0,0" Grid.Row="2" Grid.Column="0" Text="Region" FontSize="12" />
                                     <ComboBox ItemsSource="{Binding Regions}" SelectedItem="{Binding SelectedRegion}" Margin="4,2,0,0"  Grid.Row="3" 

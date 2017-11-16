@@ -12,5 +12,8 @@ namespace BisolCRM.DAL.Interfaces.Repository
         List<fnRESIDENTCONTRACT> GetRESIDENTCONTRACTs(FilterRESIDENTCONTRACT filter);
 
         RESIDENTCONTRACT GetRESIDENTCONTRACTById(int id);
+
+        int GetRESIDENTCONTRACTCount(FilterRESIDENTCONTRACT filter);
+
     }
 }

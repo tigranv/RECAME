@@ -26,6 +26,5 @@ namespace BisolCRM.DAL.Repository
             var query = db.fn_TAWDBRESCONTRACTCALC().AsQueryable();
             return filter.FilterObjects(query).ToList();
         }
-
     }
 }

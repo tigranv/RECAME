@@ -2153,7 +2153,7 @@ warning 6002: The table/view 'GlobalDB_022014_current.dbo.BS_USER_ACTION_LOG' do
                 <Property Name="FAMILY" Type="nvarchar" MaxLength="255" />
                 <Property Name="NAME" Type="nvarchar" MaxLength="255" />
                 <Property Name="FATHERNAME" Type="nvarchar" MaxLength="255" />
-                <Property Name="DUTYEND" Type="numeric" Precision="15" Scale="2" />
+                <Property Name="TotalDUTYEND" Type="numeric" Precision="38" Scale="2" />
                 <Property Name="BranchName" Type="nvarchar" MaxLength="255" />
                 <Property Name="CityName" Type="nvarchar" MaxLength="255" />
               </RowType>
@@ -3451,9 +3451,9 @@ warning 6002: The table/view 'GlobalDB_022014_current.dbo.BS_USER_ACTION_LOG' do
           <Property Name="FAMILY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
           <Property Name="FATHERNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="true" />
-          <Property Type="Decimal" Name="DUTYEND" Nullable="true" Precision="15" Scale="2" />
           <Property Type="String" Name="BranchName" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="CityName" Nullable="true" MaxLength="255" />
+          <Property Type="Decimal" Name="TotalDUTYEND" Nullable="true" Precision="38" Scale="2" />
           </ComplexType>
         <ComplexType Name="fn_Split_Result">
           <Property Name="PN" Type="Int32" Nullable="false" />
@@ -8655,9 +8655,9 @@ warning 6002: The table/view 'GlobalDB_022014_current.dbo.BS_USER_ACTION_LOG' do
                 <ScalarProperty Name="FAMILY" ColumnName="FAMILY" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="FATHERNAME" ColumnName="FATHERNAME" />
-                <ScalarProperty Name="DUTYEND" ColumnName="DUTYEND" />
                 <ScalarProperty Name="BranchName" ColumnName="BranchName" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="TotalDUTYEND" ColumnName="TotalDUTYEND" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

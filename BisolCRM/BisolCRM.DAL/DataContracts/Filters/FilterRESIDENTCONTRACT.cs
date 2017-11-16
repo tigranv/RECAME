@@ -41,7 +41,20 @@ namespace BisolCRM.DAL.DataContracts.Filters
                 query = query.Where(x => x.ID == Id.Value);
             if (CityId.HasValue)
                 query = query.Where(x => x.CITY == CityId);
+            if (SkeepRows.HasValue)
+                query = query.OrderBy(x => x.ID).Skip(SkeepRows.Value);
             return ApplyMaxRows(query);
+        }
+
+        public IQueryable<fnRESIDENTCONTRACT> FilterObjectsNoMax(IQueryable<fnRESIDENTCONTRACT> query)
+        {
+            if (BranchId.HasValue)
+                query = query.Where(x => x.BRANCH == BranchId);
+            if (Id.HasValue)
+                query = query.Where(x => x.ID == Id.Value);
+            if (CityId.HasValue)
+                query = query.Where(x => x.CITY == CityId);
+            return query;
         }
     }
 }
